@@ -1,0 +1,37 @@
+.time-element {
+  text-align: center;
+}
+
+.other-time-tools {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+}
+
+@media screen and (max-width: 700px) {
+  .other-time-tools {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
+#resume-btn-stopwatch,
+#stop-btn-stopwatch {
+  background-color: var(--accent-colour);
+  &:hover {background-color: var(--hover-accent-colour);}
+}
+
+.stopwatch-display {
+  font-size:10vw;
+  &.is-in-use {color: var(--accent-colour);} 
+}
+
+.is-hidden {display: none;}
+
+
+.is-active-button,
+.is-active-button:hover {
+  background-color: var(--accent-colour);
+}

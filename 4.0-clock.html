@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<link rel="stylesheet" type="text/css" href="style-sheets/main-style.css" />
+<link rel="stylesheet" type="text/css" href="style-sheets/4.0-clock-style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clock</title>
+</head>
+
+<body>
+
+<div id="navbar" class="navbar">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <!-- <li><a href="1.0 - Grapher.html">Grapher</a></li> -->
+    <li><a href="2.0-printable-cartesian-planes.html">Printable Cartesian Planes</a></li>
+    <li><a href="3.0-one-variable-statistics.html">One-Variable Statistics</a></li>
+    <li><a class="active" href="4.0-clock.html">Clock</a></li>
+    <!-- <li><a href="5.0 - VecAddCalc.html">Vector Addition Calculator</a></li> -->
+    <li><a href="6.0-useful-resources.html">Useful Resources</a></li>
+    <li><a href="7.0-contact-me.html">Contact Me</a></li>
+  </ul>
+</div>
+
+<div id="content" class="content">
+
+  <div id="container-clock" class="container-time-element" tabindex="0">
+    <header><h1>Clock</h1></header>
+    <div id="clock" class="time-element js-element">
+      This is where the clock would go
+    </div>
+  </div>
+
+  <div id="container-timer" class="container-time-element is-hidden" tabindex="0">
+    <header><h1>Timer</h1></header>
+    <div id="timer" class="time-element js-element">
+      This is where the timer would go
+    </div>
+  </div>
+
+  <div id="container-stopwatch" class="container-time-element is-hidden" tabindex="0">
+    <header><h1>Stopwatch</h1></header>
+      <div id="stopwatch" class="time-element">
+        <div id="stopwatch-display" class="stopwatch-display">
+          00:00:00.00
+        </div>
+        <div class="controls">
+          <button id="start-btn-stopwatch">Start</button>
+          <button id="resume-btn-stopwatch" class="is-hidden">Resume</button>
+          <button id="stop-btn-stopwatch" class="is-hidden">Stop</button>
+          <button id="reset-btn-stopwatch">Reset</button>
+        </div>
+      </div>
+  </div>
+
+  <nav class="other-time-tools">
+    <button class="nav-btn is-active-button" data-target="container-clock">Clock</button>
+    <button class="nav-btn" data-target="container-timer">Timer</button>
+    <button class="nav-btn" data-target="container-stopwatch">Stopwatch</button>
+  </nav>
+
+  <footer>Ricci Tam. Last modified 2026-10-16.</footer>
+
+</div>
+
+<script type="text/javascript" src="javascript/segmented-view.js"></script>
+<script type="text/javascript" src="javascript/stopwatch.js"></script>
+
+</body>
+
+</html>

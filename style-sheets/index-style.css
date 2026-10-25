@@ -1,0 +1,29 @@
+/* Main Page Links */
+.main-page-links li {
+  list-style-type: none;
+}
+
+.main-page-links a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Math Contest */
+h2 {margin-top: 4rem;}
+
+.math-contest,
+.math-contest td,
+.math-contest thead{
+  border: 1px solid;
+  border-collapse: collapse;
+  padding: 0.5rem;
+}
+
+.math-contest thead{
+  font-weight: 600;
+  text-align: center;
+}
+
+.cms {color: red;}
+.maa {color: blue;}
+.uw {color: green;}

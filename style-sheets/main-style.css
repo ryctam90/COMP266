@@ -1,0 +1,125 @@
+:root {
+  --navbar-width: 15vw;
+  --main-colour: rgb(40 43 73);
+  --hover-colour: rgb(78 78 146);
+  --accent-colour: rgb(165 34 34);
+  --hover-accent-colour: rgb(194, 46, 46);
+  --background-colour: rgb(235 234 235);
+  --white-colour: white;
+}
+
+.js-element {
+  background-color: aqua;
+}
+
+html {
+  background-color: var(--background-colour);
+  color: var(--main-colour);
+  font-size: 150%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, Arial, sans-serif;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.content {
+  margin-left: var(--navbar-width);
+  padding: 0 1rem;
+}
+
+h1 {color: var(--accent-colour);}
+
+footer {
+  border-top: 1px solid var(--main-colour);
+  font-style: italic;
+  margin-top: 2rem;
+}
+
+/* Common elements */
+/* Style for pill-shaped button adapted from https://www.w3schools.com/css/css3_buttons.asp */
+button {
+  background: var(--main-colour);
+  color: var(--white-colour);
+  border: none;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  &:hover {background: var(--hover-colour);}
+}
+
+textarea,
+input {
+  padding: 0.5rem;
+  border: 1px solid var(--main-colour);
+  border-radius: 4px;
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 4px var(--hover-colour);
+  }
+}
+
+a:link,
+a:visited {
+  color:var(--main-colour);
+  &:hover {color: var(--hover-colour);}
+}
+
+/* Style for Navigation Bar adapted from https://www.w3schools.com/howto/howto_js_sidenav.asp */
+#navbar {
+  position: fixed;
+  top: 0;
+  & ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: var(--navbar-width);
+    background-color: var(--main-colour);
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    height: 100vh;
+  }
+  & a {
+    display: block;
+    color: var(--white-colour);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+  }
+  & a.active {background-color: var(--accent-colour);}
+  & a:hover:not(.active) {background-color: var(--hover-colour);}
+}
+
+/* navbar for small screens adapted from https://www.w3schools.com/howto/howto_js_sidenav.asp */
+@media screen and (max-width: 1000px) {
+  #navbar {
+    position: relative;
+    & ul {
+      width: 100vw;
+      height: auto;
+      position: relative;
+    }
+    & a {
+      text-align: center;
+      float: none;
+      padding: 1rem;
+    }
+  }
+
+  #content {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,20 @@
+/* Useful Resources https://www.w3schools.com/HOWTO/tryit.asp?filename=tryhow_css_cards2*/
+.card{
+  width: 80%;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--white-colour);
+  gap: 1rem;
+  &:hover {
+    box-shadow: 0 0 4px var(--hover-colour);
+    transform: translateY(-2px);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .card {min-width: 400px;}
+}

@@ -1,0 +1,32 @@
+/* Contact me form https://www.w3schools.com/htmlcss/tryit.asp?filename=tryhtmlcss_form_styled*/
+.contact-me {
+  max-width: 40rem;
+  min-width: 30rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  background: var(--white-colour);
+  padding: 1rem;
+  border-radius: 16px;
+  border-color: var(--main-colour);
+}
+
+.contact-me > label {
+  font-weight: 600;
+}
+
+.contact-me textarea {
+  resize:vertical;
+  min-height: 5rem;
+  max-height: 30rem;
+  overflow: auto;
+}
+
+ul.user-type {margin:0;}
+
+ul.user-type li {list-style-type: none;}
+
+input[type='radio'] {
+  outline: none;
+  accent-color: var(--main-colour);
+}

@@ -1,0 +1,31 @@
+.container-printable-cartesian-plane {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.settings-menus{
+  grid-column: 1;
+  display: grid;
+  row-gap: 1rem;
+}
+.preview {grid-column: 2;}
+
+.settings-menus h2 {margin-top:0;}
+
+.btn-cluster {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media screen and (max-width: 700px) {
+  .container-printable-cartesian-plane {
+    display: flex;
+    flex-direction: column;
+  }
+  .preview {order: 1;}
+  .btn-cluster {order: 2;}
+  .settings-menus {order: 3;}
+}
