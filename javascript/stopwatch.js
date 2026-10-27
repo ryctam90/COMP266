@@ -47,7 +47,6 @@ function updateStopwatchDisplay() {
   display.textContent = `${h}:${m}:${s}.${cs}`;
 }
 
-
 function showBtn(button) {
   startBtn.classList.add('is-hidden');
   resumeBtn.classList.add('is-hidden');
