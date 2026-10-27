@@ -47,40 +47,42 @@ function updateStopwatchDisplay() {
   display.textContent = `${h}:${m}:${s}.${cs}`;
 }
 
+
+function showBtn(button) {
+  startBtn.classList.add('is-hidden');
+  resumeBtn.classList.add('is-hidden');
+  stopBtn.classList.add('is-hidden');
+  button.classList.remove('is-hidden');
+};
+
 // Triggers updateStopwatchDisplay, switches button from "start" to "stop", turns text red
 function startStopwatch() {
   clearInterval(int);
-  startBtn.classList.add('is-hidden');
-  resumeBtn.classList.add('is-hidden');
-  stopBtn.classList.remove('is-hidden');
+  showBtn(stopBtn);
   isRunning = true;
   stopwatch.focus();
   display.classList.add('is-in-use');
   int = setInterval(updateStopwatchDisplay,10);
-}
+};
 
 // Stops updateStopwatchDisplay, switches button from "stop" to "resume", text stays red
 function stopStopwatch() {
   clearInterval(int);
-  startBtn.classList.add('is-hidden');
-  resumeBtn.classList.remove('is-hidden');
-  stopBtn.classList.add('is-hidden');
+  showBtn(resumeBtn);
   isRunning = false;
   stopwatch.focus();
-}
+};
 
 // Resets the stopwatch and all settings back to default
 function resetStopwatch() {
   clearInterval(int);
-  startBtn.classList.remove('is-hidden');
-  resumeBtn.classList.add('is-hidden');
-  stopBtn.classList.add('is-hidden');
+  showBtn(startBtn);
   isRunning = false;
   stopwatch.focus();
   display.classList.remove('is-in-use');
-  [centiseconds,seconds,minutes,hours] = [0,0,0,0];
-  display.innerHTML = '00:00:00.00';
-}
+  centiseconds = 0;
+  display.textContent = '00:00:00.00';
+};
 
 // Triggers for various buttons
 startBtn.addEventListener('click', startStopwatch);
@@ -94,7 +96,7 @@ stopwatch.addEventListener('keyup', (event) => {
     if (isRunning) {stopStopwatch();}
     else {startStopwatch();}
   }
-})
+});
 
 // Triggers reset when "R" key is pressed
 // I decided not to implement this functionality yet because this is not intuitive and requires text instructions, which I have not decided how to present yet.
