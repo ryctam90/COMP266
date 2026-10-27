@@ -36,8 +36,16 @@
 
   <div id="container-timer" class="container-time-element is-hidden" tabindex="0">
     <header><h1>Timer</h1></header>
-    <div id="timer" class="time-element js-element">
-      This is where the timer would go
+    <div id="timer" class="time-element">
+      <div id="timer-display" class="timer-display">
+        <input id="timer-input" placeholder="00:00:00"></input>
+      </div>
+      <div class="controls">
+          <button id="start-btn-timer">Start</button>
+          <button id="resume-btn-timer" class="is-hidden">Resume</button>
+          <button id="stop-btn-timer" class="is-hidden">Pause</button>
+          <button id="reset-btn-timer">Reset</button>
+      </div>
     </div>
   </div>
 
@@ -57,9 +65,9 @@
   </div>
 
   <nav class="other-time-tools">
-    <button class="nav-btn is-active-button" data-target="container-clock">Clock</button>
-    <button class="nav-btn" data-target="container-timer">Timer</button>
-    <button class="nav-btn" data-target="container-stopwatch">Stopwatch</button>
+    <button class="nav-btn is-active-button" data-show="container-clock">Clock</button>
+    <button class="nav-btn" data-show="container-timer">Timer</button>
+    <button class="nav-btn" data-show="container-stopwatch">Stopwatch</button>
   </nav>
 
   <footer>Ricci Tam. Last modified 2026-10-16.</footer>

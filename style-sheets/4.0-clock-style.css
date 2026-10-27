@@ -23,6 +23,7 @@
   &:hover {background-color: var(--hover-accent-colour);}
 }
 
+.timer-display,
 .stopwatch-display {
   font-size:10vw;
   &.is-in-use {color: var(--accent-colour);} 
@@ -34,4 +35,14 @@
 .is-active-button,
 .is-active-button:hover {
   background-color: var(--accent-colour);
+}
+
+#timer-input {
+  background-color: var(--background-colour);
+  margin: 0;
+  padding: 0;
+  color: var(--main-colour);
+  field-sizing: content;
+  border-width: 0;
+  &:focus {box-shadow: none;}
 }
