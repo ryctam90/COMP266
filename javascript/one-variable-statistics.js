@@ -1,41 +1,38 @@
-  const sample = document.getElementById('data-input-box').textContent;
-  const outputDisplay = document.getElementById('one-var-stat-summary');
-  const calcBtn = document.getElementById('calc-btn');
-  const listOfOneVarStatsIds = [
-    'setSize',
-    'min',
-    'q1',
-    'median',
-    'q3',
-    'max',
-    'range',
-    'iqr',
-    'mean',
-    'popStdDev',
-    'sampleStdDev',
-    'mode',
-    ];
+const sample = document.getElementById('data-input-box').textContent;
+const display = document.getElementById('one-var-stat-summary');
+const calcBtn = document.getElementById('calc-btn');
+const listOfOneVarStatsIds = [
+  'setSize',
+  'min',
+  'q1',
+  'median',
+  'q3',
+  'max',
+  'range',
+  'iqr',
+  'mean',
+  'popStdDev',
+  'sampleStdDev',
+  'mode',
+];
 
-  function refine(text) {
-    let list = text
-      .replace(/[\s]+/g,'') //delete whitespace
-      .split(/[,]+/) //convert comma delimited string into array (of strings)
-      .map(Number) //convert all entries into numbers or NaN
-      .sort((a,b) => a-b); //sort the list; NaN (if any will appear at the end)
-    
-    if (Number.isNaN(list[list.length-1])) {
-      alert('Oops! The list does not seem correctly formatted. Please make sure that your list only contains numbers and that every number is separated by a comma.');
-    }
-    else if (list.length < 5) {
-      alert('Please make sure you have at least 5 data points.');
-    }
-    else {
-      return list;
-    }
+function refine(text) {
+  let list = text
+    .replace(/[\s]+/g,'') //delete whitespace
+    .split(/[,]+/) //convert comma delimited string into array (of strings)
+    .map(Number) //convert all entries into numbers or NaN
+    .sort((a,b) => {a-b}); //sort the list; NaN (if any will appear at the end)
+  
+  if (Number.isNaN(list.at(-1))) {
+    alert('Oops! The list does not seem correctly formatted. Please make sure that your list only contains numbers and that every number is separated by a comma.');
   }
-
-  outputDisplay.textContent = refine(sample);
-
+  else if (list.length < 5) {
+    alert('Please make sure you have at least 5 data points.');
+  }
+  else {
+    return list;
+  }
+}
 
 //finds the mode(s) given a sorted list of numbers
 function getModes(list) {
@@ -55,8 +52,6 @@ function getModes(list) {
     .filter( (datum) => freqList[datum] === maxFreq )
     .map(Number);
 };
-
-
 
 function getQuartiles(list) {
   const n = list.length;
@@ -88,4 +83,4 @@ function getQuartiles(list) {
       list[Math.floor(n*3/4)]
     ];
   };
-}
+};
