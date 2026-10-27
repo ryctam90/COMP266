@@ -7,7 +7,7 @@ const timer = document.getElementById('container-timer');
 const display = document.getElementById('timer-display');
 const startBtn = document.getElementById('start-btn-timer');
 const resumeBtn = document.getElementById('resume-btn-timer');
-const pauseBtn = document.getElementById('pause-btn-timer');
+const stopBtn = document.getElementById('stop-btn-timer');
 const resetBtn = document.getElementById('reset-btn-timer');
 
 
@@ -36,7 +36,7 @@ function runTimer () {
   clearInterval(int);
   startBtn.classList.add('is-hidden');
   resumeBtn.classList.add('is-hidden');
-  pauseBtn.classList.remove('is-hidden');
+  stopBtn.classList.remove('is-hidden');
   isRunning = true;
   int = setInterval(countdown, 1000);
 };
@@ -45,7 +45,7 @@ function pauseTimer() {
   clearInterval(int);
   startBtn.classList.add('is-hidden');
   resumeBtn.classList.remove('is-hidden');
-  pauseBtn.classList.add('is-hidden');
+  stopBtn.classList.add('is-hidden');
   isRunning = false
   //stop audio
 };
@@ -54,7 +54,7 @@ function resetTimer () {
   clearInterval(int);
   startBtn.classList.remove('is-hidden');
   resumeBtn.classList.add('is-hidden');
-  pauseBtn.classList.add('is-hidden');
+  stopBtn.classList.add('is-hidden');
   isRunning = false
   display.textContent = secondsToHMS(originalDuration);
   //stop audio
@@ -65,5 +65,5 @@ startBtn.addEventListener('click', () => {
   runTimer();
 });
 resumeBtn.addEventListener('click', runTimer)
-pauseBtn.addEventListener('click', pauseTimer);
+stopBtn.addEventListener('click', pauseTimer);
 resetBtn.addEventListener('click', resetTimer);
