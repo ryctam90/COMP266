@@ -38,11 +38,13 @@
 }
 
 #timer-input {
-  background-color: var(--background-colour);
   margin: 0;
   padding: 0;
+  background-color: var(--background-colour);
   color: var(--main-colour);
   field-sizing: content;
+  text-align: right;
   border-width: 0;
-  &:focus {box-shadow: none;}
+
+  &:focus {box-shadow: none;};
 }

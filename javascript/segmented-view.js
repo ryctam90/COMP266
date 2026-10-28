@@ -1,11 +1,11 @@
-const navBtns = document.querySelectorAll('.nav-btn');
+const tabBtns = document.querySelectorAll('.nav-btn');
 const pages = document.querySelectorAll('.container-time-element');
 
-navBtns.forEach((button) => {
+tabBtns.forEach((button) => {
   button.addEventListener('click', () => {
     pages.forEach((page) => page.classList.add('is-hidden'));
-    navBtns.forEach((btn) => btn.classList.remove('is-active-button'));
-    document.getElementById(button.dataset.show).classList.remove('is-hidden');
+    tabBtns.forEach((btn) => btn.classList.remove('is-active-button'));
+    document.getElementById(button.dataset.link).classList.remove('is-hidden');
     button.classList.add('is-active-button');
   });
 });

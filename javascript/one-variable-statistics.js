@@ -1,20 +1,21 @@
-const sample = document.getElementById('data-input-box').textContent;
+const sample = document.getElementById('data-input-box').value;
 const display = document.getElementById('one-var-stat-summary');
 const calcBtn = document.getElementById('calc-btn');
-const listOfOneVarStatsIds = [
-  'setSize',
-  'min',
-  'q1',
-  'median',
-  'q3',
-  'max',
-  'range',
-  'iqr',
-  'mean',
-  'popStdDev',
-  'sampleStdDev',
-  'mode',
-];
+const dataRefined = refine(sample);
+const stats = {
+  'setSize':0,
+  'min':0,
+  'max':0,
+  'range':0,
+  'q1':0,
+  'median':0,
+  'q3':0,
+  'iqr':0,
+  'mean':0,
+  'popStdDev':0,
+  'sampleStdDev':0,
+  'mode':0,
+}
 
 function refine(text) {
   let list = text
@@ -34,11 +35,14 @@ function refine(text) {
   }
 }
 
+
+
+
 //finds the mode(s) given a sorted list of numbers
 function getModes(list) {
   const freqList = {};
   
-  list.forEach( (element) => {
+  list.forEach((element) => {
     if (freqList[element] === undefined) {
       freqList[element] = 1;
     }
@@ -49,7 +53,7 @@ function getModes(list) {
   
   const maxFreq = Math.max(...Object.values(freqList));
   return Object.keys(freqList)
-    .filter( (datum) => freqList[datum] === maxFreq )
+    .filter((datum) => freqList[datum] === maxFreq )
     .map(Number);
 };
 
@@ -84,3 +88,16 @@ function getQuartiles(list) {
     ];
   };
 };
+
+
+
+stats.setSize = dataRefined.length;
+stats.min = dataRefined[0];
+stats.max = dataRefined.at(-1);
+stats.range = stats.max - stats.min;
+[stats.q1, stats.median, stats.q3] = getQuartiles(dataRefined);
+stats.iqr = stats.q3 - stats.q1;
+stats.mean = dataRefined.reduce((a,b) => {return a+b}, 0) / stats.setSize;
+stats.popStdDev = Math.sqrt(dataRefined.reduce((a,b) => a + (b-stats.mean)**2, 0) / stats.setSize);
+stats.sampleStdDev = Math.sqrt(dataRefined.reduce((a,b) => a + (b-stats.mean)**2, 0) / (stats.setSize - 1));
+stats.mode = getModes(dataRefined);

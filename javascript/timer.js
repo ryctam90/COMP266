@@ -1,14 +1,14 @@
 let originalDuration = 600;
 let secondsRemaining = null;
 let int = null;
-let isRunning = false;
+let timerIsRunning = false;
 
 const timer = document.getElementById('container-timer');
-const display = document.getElementById('timer-display');
-const startBtn = document.getElementById('start-btn-timer');
-const resumeBtn = document.getElementById('resume-btn-timer');
-const stopBtn = document.getElementById('stop-btn-timer');
-const resetBtn = document.getElementById('reset-btn-timer');
+const timerDisplay = document.getElementById('timer-input');
+const timerStartBtn = document.getElementById('start-btn-timer');
+const timerResumeBtn = document.getElementById('resume-btn-timer');
+const timerStopBtn = document.getElementById('stop-btn-timer');
+const timerResetBtn = document.getElementById('reset-btn-timer');
 
 
 function secondsToHMS(numSeconds) {
@@ -20,50 +20,52 @@ function secondsToHMS(numSeconds) {
 
 function hmsToSeconds(textHMS) {
   const hms = Number(textHMS);
-  return (hms % 100) + (Math.floor(hms/100) % 100) + Math.floor(hms/10000);
+  return (hms % 100) + 60*(Math.floor(hms/100) % 100) + 60*60*Math.floor(hms/10000);
 };
+
+function showTimerBtn(button){
+  timerStartBtn.classList.add('is-hidden');
+  timerResumeBtn.classList.add('is-hidden');
+  timerStopBtn.classList.add('is-hidden');
+  button.classList.remove('is-hidden');
+}
 
 function countdown() {
   secondsRemaining--;
-  display.textContent = secondsToHMS(secondsRemaining);
-  if (secondsRemaining === 0 && isRunning) {
+  timerDisplay.value = secondsToHMS(secondsRemaining);
+  if (secondsRemaining <= 0 && isRunning) {
     //play some audio
+    clearInterval(int);
   }
-};
+}
 
 function runTimer () {
-  secondsRemaining = hmsToSeconds(display.textContent);
+  secondsRemaining = hmsToSeconds(timerDisplay.value);
   clearInterval(int);
-  startBtn.classList.add('is-hidden');
-  resumeBtn.classList.add('is-hidden');
-  stopBtn.classList.remove('is-hidden');
+  showTimerBtn(timerStopBtn);
   isRunning = true;
   int = setInterval(countdown, 1000);
-};
+}
 
 function pauseTimer() {
   clearInterval(int);
-  startBtn.classList.add('is-hidden');
-  resumeBtn.classList.remove('is-hidden');
-  stopBtn.classList.add('is-hidden');
-  isRunning = false
+  showTimerBtn(timerResumeBtn);
+  isRunning = false;
   //stop audio
-};
+}
 
 function resetTimer () {
   clearInterval(int);
-  startBtn.classList.remove('is-hidden');
-  resumeBtn.classList.add('is-hidden');
-  stopBtn.classList.add('is-hidden');
-  isRunning = false
-  display.textContent = secondsToHMS(originalDuration);
+  showTimerBtn(timerStartBtn);
+  isRunning = false;
+  timerDisplay.value = secondsToHMS(originalDuration);
   //stop audio
-};
+}
 
-startBtn.addEventListener('click', () => {
-  originalDuration = hmsToSeconds(display.textContent);
+timerStartBtn.addEventListener('click', () => {
+  originalDuration = hmsToSeconds(timerDisplay.value);
   runTimer();
 });
-resumeBtn.addEventListener('click', runTimer)
-stopBtn.addEventListener('click', pauseTimer);
-resetBtn.addEventListener('click', resetTimer);
+timerResumeBtn.addEventListener('click', runTimer);
+timerStopBtn.addEventListener('click', pauseTimer);
+timerResetBtn.addEventListener('click', resetTimer);
