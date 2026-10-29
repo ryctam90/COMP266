@@ -1,28 +1,12 @@
-const sample = document.getElementById('data-input-box').value;
 const display = document.getElementById('one-var-stat-summary');
 const calcBtn = document.getElementById('calc-btn');
-const dataRefined = refine(sample);
-const stats = {
-  'setSize':0,
-  'min':0,
-  'max':0,
-  'range':0,
-  'q1':0,
-  'median':0,
-  'q3':0,
-  'iqr':0,
-  'mean':0,
-  'popStdDev':0,
-  'sampleStdDev':0,
-  'mode':0,
-}
 
 function refine(text) {
   let list = text
     .replace(/[\s]+/g,'') //delete whitespace
     .split(/[,]+/) //convert comma delimited string into array (of strings)
     .map(Number) //convert all entries into numbers or NaN
-    .sort((a,b) => {a-b}); //sort the list; NaN (if any will appear at the end)
+    .sort((a,b) => a-b); //sort the list; NaN (if any) will appear at the end
   
   if (Number.isNaN(list.at(-1))) {
     alert('Oops! The list does not seem correctly formatted. Please make sure that your list only contains numbers and that every number is separated by a comma.');
@@ -34,9 +18,6 @@ function refine(text) {
     return list;
   }
 }
-
-
-
 
 //finds the mode(s) given a sorted list of numbers
 function getModes(list) {
@@ -52,11 +33,14 @@ function getModes(list) {
   });
   
   const maxFreq = Math.max(...Object.values(freqList));
-  return Object.keys(freqList)
-    .filter((datum) => freqList[datum] === maxFreq )
+  const modes = Object.keys(freqList)
+    .filter((datum) => freqList[datum] === maxFreq)
     .map(Number);
+  return modes;
 };
 
+
+//finds the median and upper/lower quartiles of a sorted list
 function getQuartiles(list) {
   const n = list.length;
   if (n % 4 === 0) {
@@ -89,15 +73,30 @@ function getQuartiles(list) {
   };
 };
 
+calcBtn.addEventListener('click', () => {
+  const dataRaw = document.getElementById('data-input-box');
+  const dataRefined = refine(dataRaw.value);
+  const quartiles = getQuartiles(dataRefined);
+  const stats = {}
+    setSize: dataRefined.length,
+    min: dataRefined[0],
+    max: dataRefined.at(-1),
+    range: stats.max - stats.min,
+    q1: quartiles[0],
+    median: quartiles[1],
+    q3: quartiles[2],
+    iqr: stats.q3 - stats.q1,
+    mean: dataRefined.reduce((a,b) => {return a+b}, 0) / stats.setSize,
+    popStdDev: Math.sqrt(dataRefined.reduce((a,b) => a + (b-stats.mean)**2, 0) / stats.setSize),
+    sampleStdDev: Math.sqrt(dataRefined.reduce((a,b) => a + (b-stats.mean)**2, 0) / (stats.setSize - 1)),
+    mode: getModes(dataRefined)
 
-
-stats.setSize = dataRefined.length;
-stats.min = dataRefined[0];
-stats.max = dataRefined.at(-1);
-stats.range = stats.max - stats.min;
-[stats.q1, stats.median, stats.q3] = getQuartiles(dataRefined);
-stats.iqr = stats.q3 - stats.q1;
-stats.mean = dataRefined.reduce((a,b) => {return a+b}, 0) / stats.setSize;
-stats.popStdDev = Math.sqrt(dataRefined.reduce((a,b) => a + (b-stats.mean)**2, 0) / stats.setSize);
-stats.sampleStdDev = Math.sqrt(dataRefined.reduce((a,b) => a + (b-stats.mean)**2, 0) / (stats.setSize - 1));
-stats.mode = getModes(dataRefined);
+  document.getElementById('sorted-list').textContent = dataRefined.join(', ');
+  
+  // Object.keys(stats).forEach((stat) => {
+  //   //kebabization taken from https://stackoverflow.com/questions/63116039/camelcase-to-kebab-case
+  //   const kebabStat = stat.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+  //   document.getElementById(kebabStat).textContent = stats[stat];
+  // });
+  dataRaw.focus()
+});
