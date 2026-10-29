@@ -10,9 +10,11 @@ function refine(text) {
   
   if (Number.isNaN(list.at(-1))) {
     alert('Oops! The list does not seem correctly formatted. Please make sure that your list only contains numbers and that every number is separated by a comma.');
+    dataRaw.focus();
   }
   else if (list.length < 5) {
     alert('Please make sure you have at least 5 data points.');
+    dataRaw.focus()
   }
   else {
     return list;
@@ -76,27 +78,24 @@ function getQuartiles(list) {
 calcBtn.addEventListener('click', () => {
   const dataRaw = document.getElementById('data-input-box');
   const dataRefined = refine(dataRaw.value);
-  const quartiles = getQuartiles(dataRefined);
-  const stats = {}
-    setSize: dataRefined.length,
-    min: dataRefined[0],
-    max: dataRefined.at(-1),
-    range: stats.max - stats.min,
-    q1: quartiles[0],
-    median: quartiles[1],
-    q3: quartiles[2],
-    iqr: stats.q3 - stats.q1,
-    mean: dataRefined.reduce((a,b) => {return a+b}, 0) / stats.setSize,
-    popStdDev: Math.sqrt(dataRefined.reduce((a,b) => a + (b-stats.mean)**2, 0) / stats.setSize),
-    sampleStdDev: Math.sqrt(dataRefined.reduce((a,b) => a + (b-stats.mean)**2, 0) / (stats.setSize - 1)),
-    mode: getModes(dataRefined)
+  const stats = {};
+  stats.setSize = dataRefined.length;
+  stats.min = dataRefined[0];
+  stats.max = dataRefined.at(-1);
+  stats.range = stats.max - stats.min;
+  [stats.q1, stats.median, stats.q3] = getQuartiles(dataRefined);
+  stats.iqr = stats.q3 - stats.q1;
+  stats.mean = dataRefined.reduce((a,b) => {return a+b}, 0) / stats.setSize;
+  stats.popStdDev = Math.sqrt(dataRefined.reduce((a,b) => a + (b-stats.mean)**2, 0) / stats.setSize);
+  stats.sampleStdDev = Math.sqrt(dataRefined.reduce((a,b) => a + (b-stats.mean)**2, 0) / (stats.setSize - 1));
+  stats.mode = getModes(dataRefined);
 
   document.getElementById('sorted-list').textContent = dataRefined.join(', ');
   
-  // Object.keys(stats).forEach((stat) => {
-  //   //kebabization taken from https://stackoverflow.com/questions/63116039/camelcase-to-kebab-case
-  //   const kebabStat = stat.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
-  //   document.getElementById(kebabStat).textContent = stats[stat];
-  // });
+  Object.keys(stats).forEach((stat) => {
+    //kebabization taken from https://stackoverflow.com/questions/63116039/camelcase-to-kebab-case
+    const kebabStat = stat.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+    document.getElementById(kebabStat).textContent = stats[stat];
+  });
   dataRaw.focus()
 });
