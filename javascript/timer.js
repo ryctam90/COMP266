@@ -5,6 +5,7 @@ let displayAtPause = 0;
 let displayAtRun = 0;
 let startTime = null;
 let timerInt = null;
+let timerDoneInt = null;
 let timerIsRunning = false;
 
 const timer = document.getElementById('container-timer');
@@ -14,6 +15,7 @@ const timerStartBtn = document.getElementById('start-btn-timer');
 const timerResumeBtn = document.getElementById('resume-btn-timer');
 const timerStopBtn = document.getElementById('stop-btn-timer');
 const timerResetBtn = document.getElementById('reset-btn-timer');
+const chime = document.getElementById('chime');
 
 timerInput.addEventListener('input', () => {
   const userInput = timerInput.value
@@ -47,8 +49,8 @@ function countdown() {
   elapsedTimeTotal = elapsedTimeAtPause + Date.now() - startTime;
   timerInput.value = secondsToHMS(Math.ceil(originalDuration - elapsedTimeTotal/1000));
   if (elapsedTimeTotal/1000 >= originalDuration && timerIsRunning) {
-    //play some audio
     clearInterval(timerInt);
+    timerDoneInt = setInterval(() => chime.play(), 3000);
     timerDisplay.classList.add('accent-with-colour');
   }
 }
@@ -70,16 +72,17 @@ function runTimer () {
 
 function pauseTimer() {
   clearInterval(timerInt);
+  clearInterval(timerDoneInt);
   showTimerBtn(timerResumeBtn);
   timerIsRunning = false;
   timerInput.disabled = false;
   displayAtPause = hmsToSeconds(timerInput.value);
   elapsedTimeAtPause = elapsedTimeTotal;
-  //stop audio
 }
 
 function resetTimer () {
   clearInterval(timerInt);
+  clearInterval(timerDoneInt);
   showTimerBtn(timerStartBtn);
   timerIsRunning = false;
   timerInput.disabled = false;
@@ -88,7 +91,6 @@ function resetTimer () {
   elapsedTimeTotal = 0;
   displayAtPause = 0;
   timerDisplay.classList.remove('accent-with-colour');
-  //stop audio
 }
 
 timerStartBtn.addEventListener('click', runTimer);

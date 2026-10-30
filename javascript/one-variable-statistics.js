@@ -41,7 +41,6 @@ function getModes(list) {
   return modes;
 };
 
-
 //finds the median and upper/lower quartiles of a sorted list
 function getQuartiles(list) {
   const n = list.length;
