@@ -26,7 +26,7 @@
 .timer-display,
 .stopwatch-display {
   font-size:10vw;
-  &.is-in-use {color: var(--accent-colour);} 
+  &.accent-with-colour {color: var(--accent-colour);} 
 }
 
 .is-hidden {display: none;}
@@ -40,10 +40,9 @@
 #timer-input {
   margin: 0;
   padding: 0;
-  background-color: var(--background-colour);
-  color: var(--main-colour);
+  border-width: 0;
+  background-color: transparent;
   field-sizing: content;
   text-align: right;
-  border-width: 0;
   &:focus {box-shadow: none;};
 }

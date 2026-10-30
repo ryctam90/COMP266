@@ -7,28 +7,34 @@ let startTime = null;
 let timerInt = null;
 let timerIsRunning = false;
 
-
 const timer = document.getElementById('container-timer');
-const timerDisplay = document.getElementById('timer-input');
+const timerDisplay = document.getElementById('timer-display');
+const timerInput = document.getElementById('timer-input');
 const timerStartBtn = document.getElementById('start-btn-timer');
 const timerResumeBtn = document.getElementById('resume-btn-timer');
 const timerStopBtn = document.getElementById('stop-btn-timer');
 const timerResetBtn = document.getElementById('reset-btn-timer');
 
-function secondsToHMS(numSeconds) {
-  // return Math.floor(numSeconds/60/60)*10000 + 
-  //   (Math.floor(numSeconds/60) % 60)*100 +
-  //   (numSeconds % 60);
-  let h = String(Math.floor(numSeconds/60/60)).padStart(2,'0');
-  let m = String(Math.floor(numSeconds/60) % 60).padStart(2,'0');
-  let s = String(Math.floor(numSeconds) % 60).padStart(2,'0');
-  return `${h}:${m}:${s}`;
-};
+timerInput.addEventListener('input', () => {
+  const userInput = timerInput.value
+    .replace(/\D/g,'')
+    .replace(/^0+/,'')
+    .slice(0,6);
+  const sixDigits = userInput.padStart(6,'0');
+  timerInput.value = `${sixDigits.slice(0,2)}:${sixDigits.slice(2,4)}:${sixDigits.slice(4,6)}`;
+});
 
 function hmsToSeconds(textHMS) {
   const hms = Number(textHMS.replace(/:/g,''));
   return (hms % 100) + 60*(Math.floor(hms/100) % 100) + 60*60*Math.floor(hms/10000);
-};
+}
+
+function secondsToHMS(numSeconds) {
+  let h = String(Math.floor(numSeconds/60/60)).padStart(2,'0');
+  let m = String(Math.floor(numSeconds/60) % 60).padStart(2,'0');
+  let s = String(Math.floor(numSeconds) % 60).padStart(2,'0');
+  return `${h}:${m}:${s}`;
+}
 
 function showTimerBtn(button){
   timerStartBtn.classList.add('is-hidden');
@@ -39,17 +45,17 @@ function showTimerBtn(button){
 
 function countdown() {
   elapsedTimeTotal = elapsedTimeAtPause + Date.now() - startTime;
-  timerDisplay.value = secondsToHMS(Math.ceil(originalDuration - elapsedTimeTotal/1000));
-  if (elapsedTimeTotal >= originalDuration && timerIsRunning) {
+  timerInput.value = secondsToHMS(Math.ceil(originalDuration - elapsedTimeTotal/1000));
+  if (elapsedTimeTotal/1000 >= originalDuration && timerIsRunning) {
     //play some audio
-    // clearInterval(timerInt);
-    // timerDisplay.classList.add('is-in-use');
-  };
+    clearInterval(timerInt);
+    timerDisplay.classList.add('accent-with-colour');
+  }
 }
 
 function runTimer () {
   clearInterval(timerInt);
-  displayAtRun = hmsToSeconds(timerDisplay.value);
+  displayAtRun = hmsToSeconds(timerInput.value);
   if (displayAtRun !== displayAtPause) {
     originalDuration = displayAtRun;
     elapsedTimeAtPause = 0;
@@ -59,16 +65,15 @@ function runTimer () {
   timerInt = setInterval(countdown, 50);
   showTimerBtn(timerStopBtn);
   timerIsRunning = true;
-  timerDisplay.disabled = true;
-  timerDisplay.classList.add('is-in-use');
+  timerInput.disabled = true;
 }
 
 function pauseTimer() {
   clearInterval(timerInt);
   showTimerBtn(timerResumeBtn);
   timerIsRunning = false;
-  timerDisplay.disabled = false;
-  displayAtPause = hmsToSeconds(timerDisplay.value);
+  timerInput.disabled = false;
+  displayAtPause = hmsToSeconds(timerInput.value);
   elapsedTimeAtPause = elapsedTimeTotal;
   //stop audio
 }
@@ -77,21 +82,22 @@ function resetTimer () {
   clearInterval(timerInt);
   showTimerBtn(timerStartBtn);
   timerIsRunning = false;
-  timerDisplay.disabled = false;
-  timerDisplay.value = secondsToHMS(originalDuration);
+  timerInput.disabled = false;
+  timerInput.value = secondsToHMS(originalDuration);
   elapsedTimeAtPause = 0;
   elapsedTimeTotal = 0;
-  displayAtPause = null;
+  displayAtPause = 0;
+  timerDisplay.classList.remove('accent-with-colour');
   //stop audio
 }
-
-timerDisplay.addEventListener('keyup', (event) => {
-  if (event.code === 'Enter') {
-    runTimer();
-  }
-})
 
 timerStartBtn.addEventListener('click', runTimer);
 timerResumeBtn.addEventListener('click', runTimer);
 timerStopBtn.addEventListener('click', pauseTimer);
 timerResetBtn.addEventListener('click', resetTimer);
+
+timerInput.addEventListener('keyup', (event) => {
+  if (event.code === 'Enter') {
+    runTimer();
+  }
+})

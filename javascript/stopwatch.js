@@ -60,7 +60,7 @@ function startStopwatch() {
   showStopwatchBtn(stopwatchStopBtn);
   stopwatchIsRunning = true;
   stopwatch.focus();
-  stopwatchDisplay.classList.add('is-in-use');
+  stopwatchDisplay.classList.add('accent-with-colour');
   int = setInterval(updateStopwatchDisplay,10);
 }
 
@@ -78,7 +78,7 @@ function resetStopwatch() {
   showStopwatchBtn(stopwatchStartBtn);
   stopwatchIsRunning = false;
   stopwatch.focus();
-  stopwatchDisplay.classList.remove('is-in-use');
+  stopwatchDisplay.classList.remove('accent-with-colour');
   centiseconds = 0;
   stopwatchDisplay.textContent = '00:00:00.00';
 }
