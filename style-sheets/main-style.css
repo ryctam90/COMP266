@@ -25,10 +25,8 @@ body {
 }
 
 button, input, select, textarea {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
+  font: inherit;
+  color: inherit;
 }
 
 .content {

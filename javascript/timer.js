@@ -1,10 +1,11 @@
-let originalDuration = null;
+let originalDuration = 600;
+let elapsedTimeAtPause = 0;
+let elapsedTimeTotal = 0;
+let displayAtPause = 0;
+let displayAtRun = 0;
 let startTime = null;
-let int = null;
-let elapsedTime = 0;
+let timerInt = null;
 let timerIsRunning = false;
-let displayAtPause = null;
-let displayAtRun = null;
 
 
 const timer = document.getElementById('container-timer');
@@ -37,55 +38,60 @@ function showTimerBtn(button){
 }
 
 function countdown() {
-  elapsedTime = elapsedTime +  Date.now() - startTime;
-  timerDisplay.value = secondsToHMS(Math.ceil((originalDuration-elapsedTime)/1000));
-  if (elapsedTime >= originalDuration && timerIsRunning) {
+  elapsedTimeTotal = elapsedTimeAtPause + Date.now() - startTime;
+  timerDisplay.value = secondsToHMS(Math.ceil(originalDuration - elapsedTimeTotal/1000));
+  if (elapsedTimeTotal >= originalDuration && timerIsRunning) {
     //play some audio
-    clearInterval(int);
-  }
+    // clearInterval(timerInt);
+    // timerDisplay.classList.add('is-in-use');
+  };
 }
 
 function runTimer () {
-  clearInterval(int);
+  clearInterval(timerInt);
   displayAtRun = hmsToSeconds(timerDisplay.value);
-  if (displayatRun !== displayAtPause) {originalDuration = displayAtRun};
+  if (displayAtRun !== displayAtPause) {
+    originalDuration = displayAtRun;
+    elapsedTimeAtPause = 0;
+    elapsedTimeTotal = 0;
+  };
   startTime = Date.now();
+  timerInt = setInterval(countdown, 50);
   showTimerBtn(timerStopBtn);
   timerIsRunning = true;
   timerDisplay.disabled = true;
-  int = setInterval(countdown, 50);
+  timerDisplay.classList.add('is-in-use');
 }
 
 function pauseTimer() {
-  clearInterval(int);
+  clearInterval(timerInt);
   showTimerBtn(timerResumeBtn);
   timerIsRunning = false;
   timerDisplay.disabled = false;
   displayAtPause = hmsToSeconds(timerDisplay.value);
-  
+  elapsedTimeAtPause = elapsedTimeTotal;
   //stop audio
 }
 
 function resetTimer () {
-  clearInterval(int);
+  clearInterval(timerInt);
   showTimerBtn(timerStartBtn);
   timerIsRunning = false;
   timerDisplay.disabled = false;
   timerDisplay.value = secondsToHMS(originalDuration);
+  elapsedTimeAtPause = 0;
+  elapsedTimeTotal = 0;
+  displayAtPause = null;
   //stop audio
 }
 
 timerDisplay.addEventListener('keyup', (event) => {
   if (event.code === 'Enter') {
-    originalDuration = hmsToSeconds(timerDisplay.value);
     runTimer();
   }
 })
 
-timerStartBtn.addEventListener('click', () => {
-  originalDuration = hmsToSeconds(timerDisplay.value);
-  runTimer();
-});
+timerStartBtn.addEventListener('click', runTimer);
 timerResumeBtn.addEventListener('click', runTimer);
 timerStopBtn.addEventListener('click', pauseTimer);
 timerResetBtn.addEventListener('click', resetTimer);

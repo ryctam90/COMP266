@@ -45,6 +45,5 @@
   field-sizing: content;
   text-align: right;
   border-width: 0;
-
   &:focus {box-shadow: none;};
 }
