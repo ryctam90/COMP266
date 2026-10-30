@@ -1,10 +1,10 @@
 let originalDuration = null;
 let startTime = null;
 let int = null;
-let secondsRemainingAtRun = null;
-let secondsRemainingAtPause = null
-let preciseElapsedTime = null;
+let elapsedTime = 0;
 let timerIsRunning = false;
+let displayAtPause = null;
+let displayAtRun = null;
 
 
 const timer = document.getElementById('container-timer');
@@ -37,10 +37,9 @@ function showTimerBtn(button){
 }
 
 function countdown() {
-  const millisecondsElapsed = Date.now() - startTime;
-  const secondsRemainingLive = secondsRemainingAtRun - millisecondsElapsed/1000;
-  timerDisplay.value = secondsToHMS(Math.ceil(secondsRemainingLive));
-  if (secondsRemainingLive <= 0 && timerIsRunning) {
+  elapsedTime = elapsedTime +  Date.now() - startTime;
+  timerDisplay.value = secondsToHMS(Math.ceil((originalDuration-elapsedTime)/1000));
+  if (elapsedTime >= originalDuration && timerIsRunning) {
     //play some audio
     clearInterval(int);
   }
@@ -48,8 +47,8 @@ function countdown() {
 
 function runTimer () {
   clearInterval(int);
-  secondsRemainingAtRun = hmsToSeconds(timerDisplay.value);
-  if (secondsRemainingAtPause !== secondsRemainingAtRun) {originalDuration = secondsRemainingAtRun};
+  displayAtRun = hmsToSeconds(timerDisplay.value);
+  if (displayatRun !== displayAtPause) {originalDuration = displayAtRun};
   startTime = Date.now();
   showTimerBtn(timerStopBtn);
   timerIsRunning = true;
@@ -62,7 +61,7 @@ function pauseTimer() {
   showTimerBtn(timerResumeBtn);
   timerIsRunning = false;
   timerDisplay.disabled = false;
-  secondsRemainingAtPause = hmsToSeconds(timerDisplay.value);
+  displayAtPause = hmsToSeconds(timerDisplay.value);
   
   //stop audio
 }
