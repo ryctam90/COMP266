@@ -1,6 +1,4 @@
-.time-element {
-  text-align: center;
-}
+.time-tool {text-align: center;}
 
 .other-time-tools {
   display: grid;
@@ -17,20 +15,9 @@
   }
 }
 
-#resume-btn-stopwatch,
-#stop-btn-stopwatch {
-  background-color: var(--accent-colour);
-  &:hover {background-color: var(--hover-accent-colour);}
-}
-
-.timer-display,
-.stopwatch-display {
-  font-size:10vw;
-  &.accent-with-colour {color: var(--accent-colour);} 
-}
+.time-tool-display {font-size:10vw;}
 
 .is-hidden {display: none;}
-
 
 .is-active-button,
 .is-active-button:hover {
@@ -46,3 +33,12 @@
   text-align: right;
   &:focus {box-shadow: none;};
 }
+
+.accentuate-text {color: var(--accent-colour);}
+
+.accentuate-bg {
+  background-color: var(--accent-colour);
+  &:hover {background-color: var(--hover-accent-colour);}
+}
+
+.container-time-tool:fullscreen {background-color: var(--background-colour);}

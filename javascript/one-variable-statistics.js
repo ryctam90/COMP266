@@ -21,7 +21,7 @@ function refine(text) {
   }
 }
 
-//finds the mode(s) given a sorted list of numbers
+//finds the mode(s) given a list of numbers
 function getModes(list) {
   const freqList = {};
   
@@ -37,8 +37,13 @@ function getModes(list) {
   const maxFreq = Math.max(...Object.values(freqList));
   const modes = Object.keys(freqList)
     .filter((datum) => freqList[datum] === maxFreq)
-    .map(Number);
-  return modes;
+  if (modes.length === 1) {return modes}
+  else if (modes.length >= 0.1*Object.keys(freqList).length) {
+    return 'Warning: Over 10% of the distinct data values appears with the modal frequency <br />'+modes;
+  }
+  else {
+    return modes;
+  }
 };
 
 //finds the median and upper/lower quartiles of a sorted list
@@ -84,9 +89,11 @@ calcBtn.addEventListener('click', () => {
   stats.range = stats.max - stats.min;
   [stats.q1, stats.median, stats.q3] = getQuartiles(dataRefined);
   stats.iqr = stats.q3 - stats.q1;
-  stats.mean = dataRefined.reduce((a,b) => {return a+b}, 0) / stats.setSize;
-  stats.popStdDev = Math.sqrt(dataRefined.reduce((a,b) => a + (b-stats.mean)**2, 0) / stats.setSize);
-  stats.sampleStdDev = Math.sqrt(dataRefined.reduce((a,b) => a + (b-stats.mean)**2, 0) / (stats.setSize - 1));
+  stats.mean = dataRefined.reduce((a,b) => a+b, 0) / stats.setSize;
+  stats.popVar = dataRefined.reduce((a,b) => a+(b-stats.mean)**2, 0) / stats.setSize
+  stats.popStdDev = Math.sqrt(stats.popVar);
+  stats.sampleVar = dataRefined.reduce((a,b) => a+(b-stats.mean)**2, 0) / (stats.setSize - 1)
+  stats.sampleStdDev = Math.sqrt(stats.sampleVar);
   stats.mode = getModes(dataRefined);
 
   document.getElementById('sorted-list').textContent = dataRefined.join(', ');
@@ -94,7 +101,7 @@ calcBtn.addEventListener('click', () => {
   Object.keys(stats).forEach((stat) => {
     //kebabization taken from https://stackoverflow.com/questions/63116039/camelcase-to-kebab-case
     const kebabStat = stat.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
-    document.getElementById(kebabStat).textContent = stats[stat];
+    document.getElementById(kebabStat).innerHTML = stats[stat];
   });
   dataRaw.focus()
 });

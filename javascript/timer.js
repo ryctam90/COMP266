@@ -16,6 +16,8 @@ const timerResumeBtn = document.getElementById('resume-btn-timer');
 const timerStopBtn = document.getElementById('stop-btn-timer');
 const timerResetBtn = document.getElementById('reset-btn-timer');
 const chime = document.getElementById('chime');
+const timerMuteBtn = document.getElementById('mute-toggle');
+const timerFullscreenBtn = document.getElementById('fullscreen-toggle');
 
 timerInput.addEventListener('input', () => {
   const userInput = timerInput.value
@@ -50,8 +52,9 @@ function countdown() {
   timerInput.value = secondsToHMS(Math.ceil(originalDuration - elapsedTimeTotal/1000));
   if (elapsedTimeTotal/1000 >= originalDuration && timerIsRunning) {
     clearInterval(timerInt);
-    timerDoneInt = setInterval(() => chime.play(), 3000);
-    timerDisplay.classList.add('accent-with-colour');
+    chime.play();
+    timerDoneInt = setInterval(() => {chime.play()}, 550);
+    timerInput.classList.add('accentuate-text');
   }
 }
 
@@ -90,7 +93,7 @@ function resetTimer () {
   elapsedTimeAtPause = 0;
   elapsedTimeTotal = 0;
   displayAtPause = 0;
-  timerDisplay.classList.remove('accent-with-colour');
+  timerInput.classList.remove('accentuate-text');
 }
 
 timerStartBtn.addEventListener('click', runTimer);
@@ -101,5 +104,29 @@ timerResetBtn.addEventListener('click', resetTimer);
 timerInput.addEventListener('keyup', (event) => {
   if (event.code === 'Enter') {
     runTimer();
+  }
+})
+
+timerMuteBtn.addEventListener('click', () => {
+  if (chime.muted) {
+    timerMuteBtn.classList.remove('accentuate-bg');
+    chime.muted = false;
+  } 
+  else {
+    timerMuteBtn.classList.add('accentuate-bg');
+    chime.muted = true;
+  }
+})
+
+timerFullscreenBtn.addEventListener('click', () => {
+  if (document.fullscreenElement || document.fullscreenElement) {
+    timerFullscreenBtn.classList.remove('accentuate-bg');
+    if (document.exitFullscreen) {document.exitFullscreen();}
+    else if (document.webkitExitFullscreen) {document.webkitExitFullscreen();}
+  }
+  else {
+    timerFullscreenBtn.classList.add('accentuate-bg')
+    if (timer.requestFullscreen) {timer.requestFullscreen();}
+    else if (timer.webkitRequestFullscreen) {timer.webkitRequestFullscreen();}
   }
 })

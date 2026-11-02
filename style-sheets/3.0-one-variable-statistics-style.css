@@ -13,10 +13,6 @@
   margin-right: 1rem;
 }
 
-.data {grid-column: 1;}
-.one-var-stat-summary {grid-column: 2;}
-
-
 @media screen and (max-width: 700px) {
   .container-one-var-stat {
     display: flex;
@@ -24,4 +20,14 @@
   }
   .data {order: 1;}
   .one-var-stat-summary {order: 2;}
+}
+
+li {
+  margin-top: 0.5rem;
+  font-weight: 700;
+}
+
+.own-line {
+  display: block;
+  font-weight: 100;
 }

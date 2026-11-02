@@ -1,5 +1,5 @@
 const tabBtns = document.querySelectorAll('.nav-btn');
-const pages = document.querySelectorAll('.container-time-element');
+const pages = document.querySelectorAll('.container-time-tool');
 
 tabBtns.forEach((button) => {
   button.addEventListener('click', () => {
