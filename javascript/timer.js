@@ -120,12 +120,10 @@ timerMuteBtn.addEventListener('click', () => {
 
 timerFullscreenBtn.addEventListener('click', () => {
   if (document.fullscreenElement || document.fullscreenElement) {
-    timerFullscreenBtn.classList.remove('accentuate-bg');
     if (document.exitFullscreen) {document.exitFullscreen();}
     else if (document.webkitExitFullscreen) {document.webkitExitFullscreen();}
   }
   else {
-    timerFullscreenBtn.classList.add('accentuate-bg')
     if (timer.requestFullscreen) {timer.requestFullscreen();}
     else if (timer.webkitRequestFullscreen) {timer.webkitRequestFullscreen();}
   }

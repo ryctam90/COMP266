@@ -22,7 +22,7 @@
   .one-var-stat-summary {order: 2;}
 }
 
-li {
+.content li {
   margin-top: 0.5rem;
   font-weight: 700;
 }
