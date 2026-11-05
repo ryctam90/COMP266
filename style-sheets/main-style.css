@@ -77,19 +77,20 @@ a:visited {
 
 /* Style for Navigation Bar adapted from https://www.w3schools.com/howto/howto_js_sidenav.asp */
 #navbar {
-  transition: 0.5s;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
-  z-index: 1;
-  & ul {
-    position: fixed;
-    list-style-type: none;
+  background-color: var(--main-colour);
+  /* overflow-x: hidden; */
+  /* treansition: 0.5; */
+
+  & .nav-content {
     margin: 0;
     padding: 0;
-    width: 100%;
-    background-color: var(--main-colour);
     overflow: auto;
-    height: 100%;
   }
   & a {
     display: block;
@@ -99,6 +100,9 @@ a:visited {
   }
   & a.active {background-color: var(--accent-colour);}
   & a:hover:not(.active) {background-color: var(--hover-colour);}
+  &.collapsed {
+    width: 0;
+  }
 }
 
 /* navbar for small screens adapted from https://www.w3schools.com/howto/howto_js_sidenav.asp */
@@ -124,8 +128,3 @@ a:visited {
 
 
 .unbulleted li {list-style-type: none;}
-
-.collapsed {
-  display: hidden;
-  transition: 0.5s;
-}
