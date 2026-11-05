@@ -1,15 +1,20 @@
 const navbarBtn = document.getElementById('navbar-button');
 const navbar = document.getElementById('navbar')
 const overlay = ;
-let expanded = false;
+const content = document.getElementById('content');
+let collapsed = true;
 
 navbarBtn.addEventListener('click', () => {
-  if (expanded) {
-    navbar.translate(15);
-    overlay.translate();
+  if (collapsed) {
+    navbar.classList.remove('collapsed');
+    overlay.classList.remove('collapsed');
+    content.inert = true;
+    collapsed = false;
   }
   else {
-    navbar.translate(-15);
-    overlay.translate();
+    navbar.classList.add('collapsed');
+    overlay.classList.add('collasped');
+    content.inert = false;
+    collapsed = true;
   }
 })

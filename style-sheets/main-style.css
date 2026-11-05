@@ -77,19 +77,19 @@ a:visited {
 
 /* Style for Navigation Bar adapted from https://www.w3schools.com/howto/howto_js_sidenav.asp */
 #navbar {
-  position: fixed;
+  transition: 0.5s;
   top: 0;
+  left: 0;
+  z-index: 1;
   & ul {
+    position: fixed;
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: var(--navbar-width);
+    width: 100%;
     background-color: var(--main-colour);
-    position: fixed;
-    top: 0;
-    left: 0;
     overflow: auto;
-    height: 100vh;
+    height: 100%;
   }
   & a {
     display: block;
@@ -124,3 +124,8 @@ a:visited {
 
 
 .unbulleted li {list-style-type: none;}
+
+.collapsed {
+  display: hidden;
+  transition: 0.5s;
+}
