@@ -1,5 +1,5 @@
 :root {
-  --navbar-width: 15vw;
+  --navbar-width: 30vw;
   --main-colour: rgb(40 43 73);
   --hover-colour: rgb(78 78 146);
   --accent-colour: rgb(165 34 34);
@@ -30,8 +30,7 @@ button, input, select, textarea {
 }
 
 .content {
-  margin-left: var(--navbar-width);
-  padding: 0 1rem;
+  padding: 2rem;
 }
 
 h1 {color: var(--accent-colour);}
@@ -39,11 +38,12 @@ h1 {color: var(--accent-colour);}
 footer {
   border-top: 1px solid var(--main-colour);
   font-style: italic;
-  margin-top: 2rem;
+  margin-top: 0 1rem;
 }
 
 /* Common elements */
 /* Style for pill-shaped button adapted from https://www.w3schools.com/css/css3_buttons.asp */
+#home-button,
 button {
   background: var(--main-colour);
   color: var(--white-colour);
@@ -78,19 +78,18 @@ a:visited {
 /* Style for Navigation Bar adapted from https://www.w3schools.com/howto/howto_js_sidenav.asp */
 #navbar {
   height: 100%;
-  width: 100%;
+  width: var(--navbar-width);
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   left: 0;
   background-color: var(--main-colour);
-  /* overflow-x: hidden; */
-  /* treansition: 0.5; */
+  transition: 0.3s;
 
   & .nav-content {
-    margin: 0;
+    margin-top: 3rem;
     padding: 0;
-    overflow: auto;
+    overflow: hidden;
   }
   & a {
     display: block;
@@ -128,3 +127,14 @@ a:visited {
 
 
 .unbulleted li {list-style-type: none;}
+
+.nav-btn-cluster {
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: aqua;
+  background-color: rgb(0 0 0 / 0);
+  & * {z-index: 3;}
+}
+
