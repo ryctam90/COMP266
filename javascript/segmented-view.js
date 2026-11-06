@@ -8,5 +8,6 @@ tabBtns.forEach((button) => {
     document.getElementById(button.dataset.link).classList.remove('is-hidden');
     document.getElementById(button.dataset.link).focus();
     button.classList.add('is-active-button');
+    document.title = button.dataset.title;
   });
 });

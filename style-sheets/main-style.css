@@ -24,14 +24,15 @@ body {
   font-family: Verdana, Arial, sans-serif;
 }
 
+.content {
+  padding: 2rem 2rem 0;
+}
+
 button, input, select, textarea {
   font: inherit;
   color: inherit;
 }
 
-.content {
-  padding: 0 2rem;
-}
 
 h1 {color: var(--accent-colour);}
 
@@ -39,6 +40,7 @@ footer {
   border-top: 1px solid var(--main-colour);
   font-style: italic;
   margin-top: 1rem;
+  font-size: small;
 }
 
 /* Common elements */
@@ -139,21 +141,18 @@ a:visited {
     }
   }
 
-  #content {
+  .content {
     margin-left: 0;
   }
 }
 
-
 li {list-style-type: none;}
 
 .nav-btn-cluster {
-  display: flex;
+  display: block;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  background-color: aqua;
-  background-color: rgb(0 0 0 / 0);
-  & * {z-index: 3;}
+  z-index: 3;
+  background-color: transparent;
 }
-

@@ -11,3 +11,9 @@ function toggleMenu() {
 
 navbarBtn.addEventListener('click', toggleMenu);
 overlay.addEventListener('click', toggleMenu);
+document.addEventListener('keyup', (event) => {
+  if (event.code === 'Escape' && content.inert) {
+    toggleMenu();
+    navbarBtn.blur();
+  }
+});

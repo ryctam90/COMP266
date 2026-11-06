@@ -70,7 +70,7 @@ function runTimer () {
   timerInt = setInterval(countdown, 50);
   showTimerBtn(timerStopBtn);
   timerIsRunning = true;
-  timerInput.disabled = true;
+  timerInput.inert = true;
 }
 
 function pauseTimer() {
@@ -78,7 +78,7 @@ function pauseTimer() {
   clearInterval(timerDoneInt);
   showTimerBtn(timerResumeBtn);
   timerIsRunning = false;
-  timerInput.disabled = false;
+  timerInput.inert = false;
   displayAtPause = hmsToSeconds(timerInput.value);
   elapsedTimeAtPause = elapsedTimeTotal;
 }
@@ -88,7 +88,7 @@ function resetTimer () {
   clearInterval(timerDoneInt);
   showTimerBtn(timerStartBtn);
   timerIsRunning = false;
-  timerInput.disabled = false;
+  timerInput.inert = false;
   timerInput.value = secondsToHMS(originalDuration);
   elapsedTimeAtPause = 0;
   elapsedTimeTotal = 0;
