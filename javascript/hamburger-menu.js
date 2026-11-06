@@ -1,11 +1,13 @@
 const navbarBtn = document.getElementById('navbar-button');
 const navbar = document.getElementById('navbar')
-// const overlay = ;
+const overlay = document.getElementById('overlay');
 const content = document.getElementById('content');
-let collapsed = true;
 
-navbarBtn.addEventListener('click', () => {
-    navbar.classList.toggle('collapsed');
-    // overlay.classList.remove('collapsed');
-    content.inert = !content.inert;
-})
+function toggleMenu() {
+  navbar.classList.toggle('collapsed');
+  overlay.classList.toggle('collapsed');
+  content.inert = !content.inert;
+}
+
+navbarBtn.addEventListener('click', toggleMenu);
+overlay.addEventListener('click', toggleMenu);
