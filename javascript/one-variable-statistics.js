@@ -92,7 +92,7 @@ function getQuartiles(list) {
 calcBtn.addEventListener('click', () => {
   const dataRaw = document.getElementById('data-input-box');
   const dataRefined = refine(dataRaw.value);
-  const stats = {}; //creates a object with key-value pairs
+  const stats = {}; //creates an object with key-value pairs
   stats.setSize = dataRefined.length;
   stats.min = dataRefined[0];
   stats.max = dataRefined.at(-1);

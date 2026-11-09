@@ -22,16 +22,16 @@ const timerFullscreenBtn = document.getElementById('fullscreen-toggle');
 //ensures input is appears from right to left when inputted.
 timerInput.addEventListener('input', () => {
   const userInput = timerInput.value
-    .replace(/\D/g,'') //accept only digits
-    .replace(/^0+/,'') //ignore zeros that precede nonzero digits
-    .slice(0,6); //take only the first six digits
+    .replace(/\D/g,'') //take out all non-digits
+    .replace(/^0+/,'') //take out all leading zeroes
+    .slice(-6); //take only the six most recent inputted digits
   const sixDigits = userInput.padStart(6,'0');
   timerInput.value = `${sixDigits.slice(0,2)}:${sixDigits.slice(2,4)}:${sixDigits.slice(4,6)}`;
 });
 
 //takes text in the form of hh:mm:ss and turns it into number of seconds
 function hmsToSeconds(textHMS) {
-  const hms = Number(textHMS.replace(/:/g,''));
+  const hms = Number(textHMS.replace(/:/g,'')); //take out all colons
   return (hms % 100) + 60*(Math.floor(hms/100) % 100) + 60*60*Math.floor(hms/10000);
 }
 
@@ -60,7 +60,7 @@ function countdown() {
   timerInput.value = secondsToHMS(Math.ceil(originalDuration - elapsedTimeTotal/1000));
 
   //when timer hits zero, stops countdown, makes the text red, and plays a chime continuously
-  if (elapsedTimeTotal/1000 >= originalDuration && timerIsRunning) {
+  if (elapsedTimeTotal/1000 >= originalDuration) {
     clearInterval(timerInt);
     chime.play();
     timerDoneInt = setInterval(() => {chime.play()}, 550);
@@ -79,7 +79,7 @@ function runTimer () {
     originalDuration = displayAtRun;
     elapsedTimeAtPause = 0;
     elapsedTimeTotal = 0;
-  };
+  }
 
   //notes the time when timer starts and runs the countdown functions every 50 milliseconds
   startTime = Date.now();
@@ -130,7 +130,7 @@ timerInput.addEventListener('keyup', (event) => {
   if (event.code === 'Enter') {
     runTimer();
   }
-})
+});
 
 //toggles muting of the chime
 timerMuteBtn.addEventListener('click', () => {
@@ -142,7 +142,7 @@ timerMuteBtn.addEventListener('click', () => {
     timerMuteBtn.classList.add('accentuate-bg');
     chime.muted = true;
   }
-})
+});
 
 //toggles fullscreen of the timer
 //webkit prefix is needed to work on older versions of Safari
@@ -155,4 +155,4 @@ timerFullscreenBtn.addEventListener('click', () => {
     if (timer.requestFullscreen) {timer.requestFullscreen();}
     else if (timer.webkitRequestFullscreen) {timer.webkitRequestFullscreen();}
   }
-})
+});
