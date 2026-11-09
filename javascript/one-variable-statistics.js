@@ -1,6 +1,7 @@
 const display = document.getElementById('one-var-stat-summary');
 const calcBtn = document.getElementById('calc-btn');
 
+//converts text:string to sorted list of numbers
 function refine(text) {
   let list = text
     .replace(/[\s]+/g,'') //delete whitespace
@@ -8,10 +9,13 @@ function refine(text) {
     .map(Number) //convert all entries into numbers or NaN
     .sort((a,b) => a-b); //sort the list; NaN (if any) will appear at the end
   
+  //checks to see if any part of the user input is not numerical
   if (Number.isNaN(list.at(-1))) {
     alert('Oops! The list does not seem correctly formatted. Please make sure that your list only contains numbers and that every number is separated by a comma.');
     dataRaw.focus();
   }
+
+  //checks to see if the user inputted at least 5 data points
   else if (list.length < 5) {
     alert('Please make sure you have at least 5 data points.');
     dataRaw.focus()
@@ -21,10 +25,11 @@ function refine(text) {
   }
 }
 
-//finds the mode(s) given a list of numbers
+//finds the mode(s) given a list of numbers. 
 function getModes(list) {
-  const freqList = {};
+  const freqList = {}; //creates object of key-value pairs
   
+  //tallies the frequency of each key
   list.forEach((element) => {
     if (freqList[element] === undefined) {
       freqList[element] = 1;
@@ -34,9 +39,12 @@ function getModes(list) {
     }
   });
   
+  //finds the max frequency (value) and filters all the keys with that value
   const maxFreq = Math.max(...Object.values(freqList));
   const modes = Object.keys(freqList)
     .filter((datum) => freqList[datum] === maxFreq)
+  
+  //includes a message if there is more than one mode AND that there are a lot of modes (more than 10% of the data points hit the modal frequency)
   if (modes.length === 1) {return modes}
   else if (modes.length >= 0.1*Object.keys(freqList).length) {
     return 'Warning: Over 10% of the distinct data values appears with the modal frequency <br />'+modes;
@@ -46,7 +54,7 @@ function getModes(list) {
   }
 };
 
-//finds the median and upper/lower quartiles of a sorted list
+//finds the median and upper/lower quartiles of a sorted list based on the number of elements mod 4
 function getQuartiles(list) {
   const n = list.length;
   if (n % 4 === 0) {
@@ -79,10 +87,11 @@ function getQuartiles(list) {
   };
 };
 
+//when the 'Calculate' button is clicked: assigns the values of the statistics to the innerHtml of the corresponding elements
 calcBtn.addEventListener('click', () => {
   const dataRaw = document.getElementById('data-input-box');
   const dataRefined = refine(dataRaw.value);
-  const stats = {};
+  const stats = {}; //creates a object with key-value pairs
   stats.setSize = dataRefined.length;
   stats.min = dataRefined[0];
   stats.max = dataRefined.at(-1);
@@ -96,12 +105,14 @@ calcBtn.addEventListener('click', () => {
   stats.sampleStdDev = Math.sqrt(stats.sampleVar);
   stats.mode = getModes(dataRefined);
 
+  //prints a sorted list of the user input
   document.getElementById('sorted-list').textContent = dataRefined.join(', ');
   
+  //ForLoop to replace innerHtml of each stat with their values.
   Object.keys(stats).forEach((stat) => {
     //kebabization taken from https://stackoverflow.com/questions/63116039/camelcase-to-kebab-case
     const kebabStat = stat.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
     document.getElementById(kebabStat).innerHTML = stats[stat];
   });
-  dataRaw.focus()
+  dataRaw.focus() //refocus back to the user input box in case editing is needed
 });

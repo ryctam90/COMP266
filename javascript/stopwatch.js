@@ -47,14 +47,18 @@ function updateStopwatchDisplay() {
   stopwatchDisplay.textContent = `${h}:${m}:${s}.${cs}`;
 }
 
+//hides the unnecessary buttons and only shows the required button
 function showStopwatchBtn(button) {
+  //hides all of the start/stop/resume buttons
   stopwatchStartBtn.classList.add('is-hidden');
   stopwatchResumeBtn.classList.add('is-hidden');
   stopwatchStopBtn.classList.add('is-hidden');
+
+  //shows the designated button
   button.classList.remove('is-hidden');
 }
 
-// Triggers updateStopwatchDisplay, switches button from "start" to "stop", turns text red
+//triggers updateStopwatchDisplay, switches button from "start" to "stop", turns text red
 function startStopwatch() {
   clearInterval(int);
   showStopwatchBtn(stopwatchStopBtn);
@@ -65,7 +69,7 @@ function startStopwatch() {
   
 }
 
-// Stops updateStopwatchDisplay, switches button from "stop" to "resume", text stays red
+//stops updateStopwatchDisplay, switches button from "stop" to "resume", text stays red
 function stopStopwatch() {
   clearInterval(int);
   showStopwatchBtn(stopwatchResumeBtn);
@@ -73,7 +77,7 @@ function stopStopwatch() {
   stopwatch.focus();
 }
 
-// Resets the stopwatch and all settings back to default
+//resets the stopwatch and all settings back to default
 function resetStopwatch() {
   clearInterval(int);
   showStopwatchBtn(stopwatchStartBtn);
@@ -84,13 +88,13 @@ function resetStopwatch() {
   stopwatchDisplay.textContent = '00:00:00.00';
 }
 
-// Triggers for various buttons
+//triggers for various buttons
 stopwatchStartBtn.addEventListener('click', startStopwatch);
 stopwatchResumeBtn.addEventListener('click', startStopwatch);
 stopwatchStopBtn.addEventListener('click', stopStopwatch);
 stopwatchResetBtn.addEventListener('click', resetStopwatch);
 
-// Starts timer when spacebar is pressed, only when the stopwatch is focused
+//starts timer when spacebar is pressed, only when the stopwatch is focused
 stopwatch.addEventListener('keyup', (event) => {
   if (event.code === 'Space') {
     if (stopwatchIsRunning) {stopStopwatch();}

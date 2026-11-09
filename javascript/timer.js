@@ -19,20 +19,23 @@ const chime = document.getElementById('chime');
 const timerMuteBtn = document.getElementById('mute-toggle');
 const timerFullscreenBtn = document.getElementById('fullscreen-toggle');
 
+//ensures input is set to "microwave input behaviour" with numerical values only.
 timerInput.addEventListener('input', () => {
   const userInput = timerInput.value
-    .replace(/\D/g,'')
-    .replace(/^0+/,'')
-    .slice(0,6);
+    .replace(/\D/g,'') //accept only digits
+    .replace(/^0+/,'') //ignore zeros that precede nonzero digits
+    .slice(0,6); //take only the first six digits
   const sixDigits = userInput.padStart(6,'0');
   timerInput.value = `${sixDigits.slice(0,2)}:${sixDigits.slice(2,4)}:${sixDigits.slice(4,6)}`;
 });
 
+//takes text in the form of hh:mm:ss and turns it into number of seconds
 function hmsToSeconds(textHMS) {
   const hms = Number(textHMS.replace(/:/g,''));
   return (hms % 100) + 60*(Math.floor(hms/100) % 100) + 60*60*Math.floor(hms/10000);
 }
 
+//takes the number of seconds and turns it into hh:mm:ss
 function secondsToHMS(numSeconds) {
   let h = String(Math.floor(numSeconds/60/60)).padStart(2,'0');
   let m = String(Math.floor(numSeconds/60) % 60).padStart(2,'0');
@@ -40,12 +43,14 @@ function secondsToHMS(numSeconds) {
   return `${h}:${m}:${s}`;
 }
 
+//hides the unnecessary buttons and only shows the required button
 function showTimerBtn(button){
   timerStartBtn.classList.add('is-hidden');
   timerResumeBtn.classList.add('is-hidden');
   timerStopBtn.classList.add('is-hidden');
   button.classList.remove('is-hidden');
 }
+
 
 function countdown() {
   elapsedTimeTotal = elapsedTimeAtPause + Date.now() - startTime;
