@@ -1,16 +1,13 @@
 :root {
-  --navbar-width: 30vw;
-  --main-colour: rgb(40 43 73);
-  --hover-colour: rgb(78 78 146);
-  --accent-colour: rgb(165 34 34);
-  --hover-accent-colour: rgb(194, 46, 46);
-  --background-colour: rgb(235 234 235);
+  --main-colour: rgb(40 40 70);
+  --hover-colour: rgb(80 80 150);
+  --accent-colour: rgb(170 30 30);
+  --hover-accent-colour: rgb(200, 50, 50);
+  --background-colour: rgb(235 235 235);
   --white-colour: white;
 }
 
-.js-element {
-  background-color: aqua;
-}
+.js-element {background-color: aqua;}
 
 html {
   background-color: var(--background-colour);
@@ -22,10 +19,39 @@ body {
   margin: 0;
   padding: 0;
   font-family: Verdana, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-.content {
-  padding: 2rem 2rem 0;
+header {min-height: 2.5rem;}
+
+#navbar-button {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 3;
+  &:hover {transform: scale(1.1);}
+}
+
+h1 {
+  color: var(--accent-colour);
+  margin: 0 0 0 60px;
+  white-space: nowrap; /*https://www.w3schools.com/cssref/css3_pr_text-overflow.php*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+main{
+  overflow: auto;
+  flex-grow: 1;
+  padding: 0 1rem;
+}
+
+footer {
+  border-top: 1px solid var(--main-colour);
+  font-style: italic;
+  font-size: small;
 }
 
 button, input, select, textarea {
@@ -33,17 +59,8 @@ button, input, select, textarea {
   color: inherit;
 }
 
+li {list-style-type: none;}
 
-h1 {color: var(--accent-colour);}
-
-footer {
-  border-top: 1px solid var(--main-colour);
-  font-style: italic;
-  margin-top: 1rem;
-  font-size: small;
-}
-
-/* Common elements */
 /* Style for pill-shaped button adapted from https://www.w3schools.com/css/css3_buttons.asp */
 button {
   background: var(--main-colour);
@@ -79,7 +96,7 @@ a:visited {
 /* Style for Navigation Bar adapted from https://www.w3schools.com/howto/howto_js_sidenav.asp */
 #navbar {
   height: 100%;
-  width: var(--navbar-width);
+  width: fit-content;
   position: fixed;
   z-index: 2;
   top: 0;
@@ -87,7 +104,10 @@ a:visited {
   background-color: var(--main-colour);
   transform: translateX(0);
   transition: transform 0.3s;
-
+  &.collapsed {
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
   & .nav-list {
     margin-top: 3rem;
     padding: 0;
@@ -101,13 +121,9 @@ a:visited {
   }
   & a.active {background-color: var(--accent-colour);}
   & a:hover:not(.active) {background-color: var(--hover-colour);}
-  &.collapsed {
-    transform: translateX(-100%);
-    transition: transform 0.3s;
-  }
 }
 
-#overlay{
+#overlay {
   background-color: rgb(0 0 0 / 0.6);
   height: 100%;
   width: 100%; 
@@ -115,44 +131,14 @@ a:visited {
   z-index: 1;
   top: 0;
   left: 0;
-  display: block;
   &.collapsed {
     display: none;
   }
 }
 
-
-
-
-
-/* navbar for small screens adapted from https://www.w3schools.com/howto/howto_js_sidenav.asp */
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 700px) {
   #navbar {
-    position: relative;
-    & ul {
-      width: 100vw;
-      height: auto;
-      position: relative;
-    }
-    & a {
-      text-align: center;
-      float: none;
-      padding: 1rem;
-    }
+    width: 100%;
+    text-align: center;
   }
-
-  .content {
-    margin-left: 0;
-  }
-}
-
-li {list-style-type: none;}
-
-.nav-btn-cluster {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 3;
-  background-color: transparent;
 }

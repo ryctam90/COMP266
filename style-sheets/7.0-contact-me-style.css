@@ -1,7 +1,7 @@
 /* Contact me form https://www.w3schools.com/htmlcss/tryit.asp?filename=tryhtmlcss_form_styled*/
 .contact-me {
   max-width: 40rem;
-  min-width: 30rem;
+  min-width: 10rem;
   margin: 0 auto;
   display: grid;
   gap: 1rem;
@@ -15,7 +15,7 @@
   font-weight: 600;
 }
 
-.contact-me textarea {
+textarea {
   resize:vertical;
   min-height: 5rem;
   max-height: 30rem;

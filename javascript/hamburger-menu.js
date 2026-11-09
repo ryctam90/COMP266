@@ -6,6 +6,8 @@ const content = document.getElementById('content');
 function toggleMenu() {
   navbar.classList.toggle('collapsed');
   overlay.classList.toggle('collapsed');
+  if (content.inert) {navbarBtn.src = 'assets/menu-button.svg'}
+  else {navbarBtn.src = 'assets/menu-button-inverted.svg'}
   content.inert = !content.inert;
 }
 

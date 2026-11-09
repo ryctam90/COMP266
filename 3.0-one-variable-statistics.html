@@ -11,11 +11,6 @@
 </head>
 
 <body>
-
-<div id="nav-btn-cluster" class="nav-btn-cluster">
-  <button id="navbar-button">Menu</button>
-</div>
-
 <div id="overlay" class="overlay collapsed"></div>
 
 <nav  id="navbar" class="navbar collapsed">
@@ -24,18 +19,22 @@
     <!-- <li><a href="1.0 - Grapher.html">Grapher</a></li> -->
     <li><a href="2.0-printable-cartesian-planes.html">Printable Cartesian Planes</a></li>
     <li><a class="active" href="3.0-one-variable-statistics.html">One-Variable Statistics</a></li>
-    <li><a href="4.0-clock.html">Clock</a></li>
+    <li><a href="4.0-clock.html">Timing Tools</a></li>
     <!-- <li><a href="5.0 - VecAddCalc.html">Vector Addition Calculator</a></li> -->
     <li><a href="6.0-useful-resources.html">Useful Resources</a></li>
     <li><a href="7.0-contact-me.html">Contact Me</a></li>
   </ul>
 </nav>
 
-<div id="content" class="content">
-  <header><h1>One-Variable Statistics</h1></header>
+<header>
+  <img id="navbar-button" src="assets/menu-button.svg" aria-label="Open Menu" height="40">
+  <h1 id="banner-title">One-Variable Statistics</h1>
+</header>
+
+<main id="content" class="content">
   <div class="container-one-var-stat">
     <div id="data" class="data">
-      <label for="data-input-box">Type or paste at least five data points in the box below. Data values should be separated by commas. Spaces will be ignored.</label>
+      <p>Type or paste at least five data points in the box below. Data values should be separated by commas. Spaces will be ignored.</p>
       <textarea id="data-input-box"></textarea>
       <div><button id="calc-btn">Calculate</button></div>
     </div>
@@ -86,12 +85,12 @@
         <li>Interquartile range:
           <span id="iqr" class="own-line">.</span>
         </li>
-
       </ul>
     </div>
   </div>
-  <footer>Ricci Tam. Last modified 2026-10-16.</footer>
-</div>
+</main>
+
+<footer>Ricci Tam. Last modified 2026-11-08.</footer>
 
 <script type="text/javascript" src="javascript/one-variable-statistics.js"></script>
 <script type="text/javascript" src="javascript/hamburger-menu.js"></script>

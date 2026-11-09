@@ -70,7 +70,7 @@ function runTimer () {
   timerInt = setInterval(countdown, 50);
   showTimerBtn(timerStopBtn);
   timerIsRunning = true;
-  timerInput.inert = true;
+  timerInput.readOnly = true;
 }
 
 function pauseTimer() {
@@ -78,9 +78,9 @@ function pauseTimer() {
   clearInterval(timerDoneInt);
   showTimerBtn(timerResumeBtn);
   timerIsRunning = false;
-  timerInput.inert = false;
   displayAtPause = hmsToSeconds(timerInput.value);
   elapsedTimeAtPause = elapsedTimeTotal;
+  timerInput.readOnly = false;
 }
 
 function resetTimer () {
@@ -88,12 +88,12 @@ function resetTimer () {
   clearInterval(timerDoneInt);
   showTimerBtn(timerStartBtn);
   timerIsRunning = false;
-  timerInput.inert = false;
   timerInput.value = secondsToHMS(originalDuration);
   elapsedTimeAtPause = 0;
   elapsedTimeTotal = 0;
   displayAtPause = 0;
   timerInput.classList.remove('accentuate-text');
+  timerInput.readOnly = false;
 }
 
 timerStartBtn.addEventListener('click', runTimer);

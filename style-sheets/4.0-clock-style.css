@@ -1,21 +1,28 @@
 .time-tool {text-align: center;}
 
+.controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap
+}
+
 .other-time-tools {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  place-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 1px solid var(--main-colour);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 700px) {
   .other-time-tools {
-    display: flex;
     justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+
   }
 }
 
-.time-tool-display {font-size:10vw;}
+.time-tool-display {font-size:14vw;}
 
 .is-hidden {display: none;}
 
@@ -41,4 +48,10 @@
   &:hover {background-color: var(--hover-accent-colour);}
 }
 
-.container-time-tool:fullscreen {background-color: var(--background-colour);}
+.container-time-tool:fullscreen {
+  background-color: var(--background-colour);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & .time-tool-display {font-size: 20vw;}
+}

@@ -22,12 +22,12 @@
   .one-var-stat-summary {order: 2;}
 }
 
-.content li {
+.one-var-stat-summary li {
   margin-top: 0.5rem;
-  font-weight: 700;
+  font-weight: bold;
 }
 
 .own-line {
   display: block;
-  font-weight: 100;
+  font-weight: normal;
 }

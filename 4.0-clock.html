@@ -7,15 +7,10 @@
 <link rel="stylesheet" type="text/css" href="style-sheets/4.0-clock-style.css" />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Clock</title>
+<title>Timing Tools</title>
 </head>
 
 <body>
-
-<div id="nav-btn-cluster" class="nav-btn-cluster">
-  <button id="navbar-button">Menu</button>
-</div>
-
 <div id="overlay" class="overlay collapsed"></div>
 
 <nav id="navbar" class="navbar collapsed">
@@ -24,27 +19,29 @@
     <!-- <li><a href="1.0 - Grapher.html">Grapher</a></li> -->
     <li><a href="2.0-printable-cartesian-planes.html">Printable Cartesian Planes</a></li>
     <li><a href="3.0-one-variable-statistics.html">One-Variable Statistics</a></li>
-    <li><a class="active" href="4.0-clock.html">Clock</a></li>
+    <li><a class="active" href="4.0-clock.html">Timing Tools</a></li>
     <!-- <li><a href="5.0 - VecAddCalc.html">Vector Addition Calculator</a></li> -->
     <li><a href="6.0-useful-resources.html">Useful Resources</a></li>
     <li><a href="7.0-contact-me.html">Contact Me</a></li>
   </ul>
 </nav>
 
-<div id="content" class="content">
+<header>
+  <img id="navbar-button" src="assets/menu-button.svg" aria-label="Open Menu" height="40">
+  <h1 id="banner-title">Clock</h1>
+</header>
 
+<main id="content" class="content">
   <div id="container-clock" class="container-time-tool" tabindex="0">
-    <header><h1>Clock</h1></header>
     <div id="clock" class="time-tool js-element time-tool-display">
       This is where the clock would go
     </div>
   </div>
 
   <div id="container-timer" class="container-time-tool is-hidden" tabindex="0">
-    <header><h1>Timer</h1></header>
     <div id="timer" class="time-tool">
       <div id="timer-display" class="time-tool-display">
-        <input id="timer-input" placeholder="00:10:00" />
+        <input id="timer-input" class="time-tool-display" placeholder="00:10:00" />
       </div>
       <div class="controls">
           <button id="start-btn-timer">Start</button>
@@ -58,18 +55,17 @@
   </div>
 
   <div id="container-stopwatch" class="container-time-tool is-hidden" tabindex="0">
-    <header><h1>Stopwatch</h1></header>
-      <div id="stopwatch" class="time-tool">
-        <div id="stopwatch-display" class="time-tool-display">
-          00:00:00.00
-        </div>
-        <div class="controls">
-          <button id="start-btn-stopwatch">Start</button>
-          <button id="resume-btn-stopwatch" class="is-hidden accentuate-bg">Resume</button>
-          <button id="stop-btn-stopwatch" class="is-hidden accentuate-bg">Stop</button>
-          <button id="reset-btn-stopwatch">Reset</button>
-        </div>
+    <div id="stopwatch" class="time-tool">
+      <div id="stopwatch-display" class="time-tool-display">
+        00:00:00.00
       </div>
+      <div class="controls">
+        <button id="start-btn-stopwatch">Start</button>
+        <button id="resume-btn-stopwatch" class="is-hidden accentuate-bg">Resume</button>
+        <button id="stop-btn-stopwatch" class="is-hidden accentuate-bg">Stop</button>
+        <button id="reset-btn-stopwatch">Reset</button>
+      </div>
+    </div>
   </div>
 
   <nav class="other-time-tools">
@@ -77,16 +73,13 @@
     <button class="nav-btn" data-link="container-timer" data-title="Timer">Timer</button>
     <button class="nav-btn" data-link="container-stopwatch" data-title="Stopwatch">Stopwatch</button>
   </nav>
+</main>
 
-  <footer>Ricci Tam. Last modified 2026-10-16.</footer>
-
-</div>
+<footer>Ricci Tam. Last modified 2026-11-08.</footer>
 
 <audio id="chime" src="assets/chime.mp3"></audio>
 <!-- Audio sampled from: -->
 <!-- Nesrality (2022). Ragtime Piano - Silks and Rags, by Fred S. Stone (1901) [Audio]. Pixabay. https://pixabay.com/music/solo-piano-ragtime-piano-silks-and-rags-by-fred-s-stone-1901-pd-112086/ -->
-
-
 <script type="text/javascript" src="javascript/segmented-view.js"></script>
 <script type="text/javascript" src="javascript/stopwatch.js"></script>
 <script type="text/javascript" src="javascript/timer.js"></script>

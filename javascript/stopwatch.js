@@ -62,6 +62,7 @@ function startStopwatch() {
   stopwatch.focus();
   stopwatchDisplay.classList.add('accentuate-text');
   int = setInterval(updateStopwatchDisplay,10);
+  
 }
 
 // Stops updateStopwatchDisplay, switches button from "stop" to "resume", text stays red
@@ -95,7 +96,7 @@ stopwatch.addEventListener('keyup', (event) => {
     if (stopwatchIsRunning) {stopStopwatch();}
     else {startStopwatch();}
   }
-})
+});
 
 // Triggers reset when "R" key is pressed
 // I decided not to implement this functionality yet because this is not intuitive and requires text instructions, which I have not decided how to present yet.
