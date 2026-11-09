@@ -44,7 +44,8 @@ function getModes(list) {
   const modes = Object.keys(freqList)
     .filter((datum) => freqList[datum] === maxFreq)
   
-  //includes a message if there is more than one mode AND that there are a lot of modes (more than 10% of the data points hit the modal frequency)
+  //includes a message if there is more than one mode AND that there are a lot of modes
+  //(more than 10% of the data points hit the modal frequency)
   if (modes.length === 1) {return modes}
   else if (modes.length >= 0.1*Object.keys(freqList).length) {
     return 'Warning: Over 10% of the distinct data values appears with the modal frequency <br />'+modes;

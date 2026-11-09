@@ -39,6 +39,7 @@ const stopwatchResetBtn = document.getElementById('reset-btn-stopwatch');
 function updateStopwatchDisplay() {
   centiseconds++;
   
+  //padStart ensures single digits are preceded by a leading 0
   let h = String(Math.floor(centiseconds/100/60/60)).padStart(2,'0');
   let m = String(Math.floor(centiseconds/100/60) % 60).padStart(2,'0');
   let s = String(Math.floor(centiseconds/100) % 60).padStart(2,'0');
@@ -59,6 +60,7 @@ function showStopwatchBtn(button) {
 }
 
 //triggers updateStopwatchDisplay, switches button from "start" to "stop", turns text red
+//refocuses on stopwatch so spacebar actions can work immediately
 function startStopwatch() {
   clearInterval(int);
   showStopwatchBtn(stopwatchStopBtn);
@@ -70,6 +72,7 @@ function startStopwatch() {
 }
 
 //stops updateStopwatchDisplay, switches button from "stop" to "resume", text stays red
+//refocuses on stopwatch so spacebar actions can work immediately
 function stopStopwatch() {
   clearInterval(int);
   showStopwatchBtn(stopwatchResumeBtn);
@@ -78,6 +81,7 @@ function stopStopwatch() {
 }
 
 //resets the stopwatch and all settings back to default
+//refocuses on stopwatch so spacebar actions can work immediately
 function resetStopwatch() {
   clearInterval(int);
   showStopwatchBtn(stopwatchStartBtn);
@@ -101,9 +105,3 @@ stopwatch.addEventListener('keyup', (event) => {
     else {startStopwatch();}
   }
 });
-
-// Triggers reset when "R" key is pressed
-// I decided not to implement this functionality yet because this is not intuitive and requires text instructions, which I have not decided how to present yet.
-// stopwatch.addEventListener('keyup', (event) => {
-//   if (event.code === 'KeyR') {resetStopwatch();}
-// })

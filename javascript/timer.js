@@ -19,7 +19,7 @@ const chime = document.getElementById('chime');
 const timerMuteBtn = document.getElementById('mute-toggle');
 const timerFullscreenBtn = document.getElementById('fullscreen-toggle');
 
-//ensures input is set to "microwave input behaviour" with numerical values only.
+//ensures input is appears from right to left when inputted.
 timerInput.addEventListener('input', () => {
   const userInput = timerInput.value
     .replace(/\D/g,'') //accept only digits
@@ -35,7 +35,7 @@ function hmsToSeconds(textHMS) {
   return (hms % 100) + 60*(Math.floor(hms/100) % 100) + 60*60*Math.floor(hms/10000);
 }
 
-//takes the number of seconds and turns it into hh:mm:ss
+//takes the number of seconds and turns it into text in the form of hh:mm:ss
 function secondsToHMS(numSeconds) {
   let h = String(Math.floor(numSeconds/60/60)).padStart(2,'0');
   let m = String(Math.floor(numSeconds/60) % 60).padStart(2,'0');
@@ -51,10 +51,15 @@ function showTimerBtn(button){
   button.classList.remove('is-hidden');
 }
 
-
+//refreshes the timer display by counting down the seconds (rounded up)
 function countdown() {
+  //calculates ellapsed time by adding ellapsed time since the countdown started to the total ellapsed time since most recent pause
   elapsedTimeTotal = elapsedTimeAtPause + Date.now() - startTime;
+
+  //rounds the remaining time up to the nearest second, then refreshes display
   timerInput.value = secondsToHMS(Math.ceil(originalDuration - elapsedTimeTotal/1000));
+
+  //when timer hits zero, stops countdown, makes the text red, and plays a chime continuously
   if (elapsedTimeTotal/1000 >= originalDuration && timerIsRunning) {
     clearInterval(timerInt);
     chime.play();
@@ -63,21 +68,30 @@ function countdown() {
   }
 }
 
+//starts the timer
 function runTimer () {
   clearInterval(timerInt);
+
+  //detects if user has changed the time on the timer. If there was a change,
+  //the most recent change is noted so that the reset button can reset to the duration that the user typed
   displayAtRun = hmsToSeconds(timerInput.value);
   if (displayAtRun !== displayAtPause) {
     originalDuration = displayAtRun;
     elapsedTimeAtPause = 0;
     elapsedTimeTotal = 0;
   };
+
+  //notes the time when timer starts and runs the countdown functions every 50 milliseconds
   startTime = Date.now();
   timerInt = setInterval(countdown, 50);
   showTimerBtn(timerStopBtn);
   timerIsRunning = true;
-  timerInput.readOnly = true;
+  timerInput.readOnly = true; //ensures user can't change input whlie timer is running
 }
 
+//pauses the timer.
+//Updates and stores the total ellapsed time to be used for the next time the timer resumes
+//Updates and stores the time display at pause to compare with the next time the timer resumes
 function pauseTimer() {
   clearInterval(timerInt);
   clearInterval(timerDoneInt);
@@ -85,9 +99,12 @@ function pauseTimer() {
   timerIsRunning = false;
   displayAtPause = hmsToSeconds(timerInput.value);
   elapsedTimeAtPause = elapsedTimeTotal;
-  timerInput.readOnly = false;
+  timerInput.readOnly = false; //enables the user to change timer input
 }
 
+//resets the timer and all settings back to default.
+//The duration sets back to the most recent change made to the timer display
+//If user did not input anything, the initial duration is 10 minutes.
 function resetTimer () {
   clearInterval(timerInt);
   clearInterval(timerDoneInt);
@@ -98,20 +115,24 @@ function resetTimer () {
   elapsedTimeTotal = 0;
   displayAtPause = 0;
   timerInput.classList.remove('accentuate-text');
-  timerInput.readOnly = false;
+  timerInput.readOnly = false; //enables the user to change timer input
 }
 
+
+//triggers for various buttons
 timerStartBtn.addEventListener('click', runTimer);
 timerResumeBtn.addEventListener('click', runTimer);
 timerStopBtn.addEventListener('click', pauseTimer);
 timerResetBtn.addEventListener('click', resetTimer);
 
+//enables timers to start when user presses enter after inputting duration
 timerInput.addEventListener('keyup', (event) => {
   if (event.code === 'Enter') {
     runTimer();
   }
 })
 
+//toggles muting of the chime
 timerMuteBtn.addEventListener('click', () => {
   if (chime.muted) {
     timerMuteBtn.classList.remove('accentuate-bg');
@@ -123,8 +144,10 @@ timerMuteBtn.addEventListener('click', () => {
   }
 })
 
+//toggles fullscreen of the timer
+//webkit prefix is needed to work on older versions of Safari
 timerFullscreenBtn.addEventListener('click', () => {
-  if (document.fullscreenElement || document.fullscreenElement) {
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
     if (document.exitFullscreen) {document.exitFullscreen();}
     else if (document.webkitExitFullscreen) {document.webkitExitFullscreen();}
   }
