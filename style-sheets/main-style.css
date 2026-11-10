@@ -118,7 +118,8 @@ a:visited {
   background-color: var(--main-colour);
   transform: translateX(0);
   transition: transform 0.3s;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   &.collapsed {
     transform: translateX(-100%);
     transition: transform 0.3s;
@@ -126,7 +127,8 @@ a:visited {
   & .nav-list {
     margin-top: 3rem;
     padding: 0;
-    overflow: hidden;
+    overflow-y: auto;
+    flex-grow: 1;
   }
   & a {
     display: block;
