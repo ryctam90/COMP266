@@ -13,8 +13,8 @@
 <body>
 <div id="overlay" class="overlay collapsed"></div>
 
-<nav  id="navbar" class="navbar collapsed">
-  <ul class="nav-list">
+<nav id="navbar" class="navbar collapsed" aria-label="Navigation Menu">
+  <ul class="nav-list" aria-labelledby="navbar">
     <li><a href="index.html">Home</a></li>
     <!-- <li><a href="1.0 - Grapher.html">Grapher</a></li> -->
     <li><a href="2.0-printable-cartesian-planes.html">Printable Cartesian Planes</a></li>
@@ -27,7 +27,7 @@
 </nav>
 
 <header>
-  <img id="navbar-button" src="assets/menu-button.svg" aria-label="Navigation Bar" height="40">
+  <img id="navbar-button" src="assets/menu-button.svg" aria-label="Open/Close Navigation Menu" height="40">
   <h1 id="banner-title">One-Variable Statistics</h1>
 </header>
 
@@ -35,8 +35,8 @@
   <div class="container-one-var-stat">
     <div id="data" class="data">
       <p>Type or paste at least five data points in the box below. Data values should be separated by commas. Spaces will be ignored.</p>
-      <textarea id="data-input-box"></textarea>
-      <div><button id="calc-btn">Calculate</button></div>
+      <textarea id="data-input-box" aria-label="Type your data in here"></textarea>
+      <div><button id="calc-btn" aria-label="Calculate">Calculate</button></div>
     </div>
     <div id="one-var-stat-summary" class="one-var-stat-summary">
       <ul>

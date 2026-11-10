@@ -13,8 +13,8 @@
 <body>
 <div id="overlay" class="overlay collapsed"></div>
 
-<nav id="navbar" class="navbar collapsed">
-  <ul class="nav-list">
+<nav id="navbar" class="navbar collapsed" aria-label="Navigation Menu">
+  <ul class="nav-list" aria-labelledby="navbar">
     <li><a href="index.html">Home</a></li>
     <!-- <li><a href="1.0 - Grapher.html">Grapher</a></li> -->
     <li><a href="2.0-printable-cartesian-planes.html">Printable Cartesian Planes</a></li>
@@ -27,7 +27,7 @@
 </nav>
 
 <header>
-  <img id="navbar-button" src="assets/menu-button.svg" aria-label="Navigation Bar" height="40">
+  <img id="navbar-button" src="assets/menu-button.svg" aria-label="Open/Close Navigation Menu" height="40">
   <h1 id="banner-title">Clock</h1>
 </header>
 
@@ -44,12 +44,12 @@
         <input id="timer-input" class="time-tool-display" placeholder="00:10:00" />
       </div>
       <div class="controls">
-          <button id="start-btn-timer">Start</button>
-          <button id="resume-btn-timer" class="is-hidden accentuate-bg">Resume</button>
-          <button id="stop-btn-timer" class="is-hidden accentuate-bg">Pause</button>
-          <button id="reset-btn-timer">Reset</button>
-          <button id="mute-toggle">Mute</button>
-          <button id="fullscreen-toggle">Fullscreen</button>
+          <button id="start-btn-timer" aria-label="Start">Start</button>
+          <button id="resume-btn-timer" class="is-hidden accentuate-bg" aria-label="Resume">Resume</button>
+          <button id="stop-btn-timer" class="is-hidden accentuate-bg" aria-label="Pause">Pause</button>
+          <button id="reset-btn-timer" aria-label="Reset">Reset</button>
+          <button id="mute-toggle" aria-label="Toggle mute">Mute</button>
+          <button id="fullscreen-toggle" aria-label="Toggle fullscreen">Fullscreen</button>
       </div>
     </div>
   </div>
@@ -60,19 +60,42 @@
         00:00:00.00
       </div>
       <div class="controls">
-        <button id="start-btn-stopwatch">Start</button>
-        <button id="resume-btn-stopwatch" class="is-hidden accentuate-bg">Resume</button>
-        <button id="stop-btn-stopwatch" class="is-hidden accentuate-bg">Stop</button>
-        <button id="reset-btn-stopwatch">Reset</button>
+        <button id="start-btn-stopwatch" aria-label="Start">Start</button>
+        <button id="resume-btn-stopwatch" class="is-hidden accentuate-bg" aria-label="Resume">Resume</button>
+        <button id="stop-btn-stopwatch" class="is-hidden accentuate-bg" aria-label="Stop">Stop</button>
+        <button id="reset-btn-stopwatch" aria-label="Reset">Reset</button>
       </div>
     </div>
   </div>
 
-  <nav class="other-time-tools">
-    <button class="nav-btn is-active-button" data-link="container-clock" data-title="Clock">Clock</button>
-    <button class="nav-btn" data-link="container-timer" data-title="Timer">Timer</button>
-    <button class="nav-btn" data-link="container-stopwatch" data-title="Stopwatch">Stopwatch</button>
-  </nav>
+  <div class="other-time-tools">
+    <button
+      class="nav-btn is-active-button"
+      data-link="container-clock"
+      data-title="Clock"
+      aria-label="Switch to Clock"
+    >
+      Clock
+    </button>
+    
+    <button
+      class="nav-btn"
+      data-link="container-timer"
+      data-title="Timer"
+      aria-label="Switch to Timer"
+    >
+      Timer
+    </button>
+    
+    <button
+      class="nav-btn"
+      data-link="container-stopwatch"
+      data-title="Stopwatch"
+      aria-label="Switch to Stopwatch"
+    >
+      Stopwatch
+    </button>
+  </div>
 </main>
 
 <footer>Ricci Tam. Last modified 2026-11-08.</footer>

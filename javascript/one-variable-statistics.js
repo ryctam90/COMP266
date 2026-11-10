@@ -5,6 +5,7 @@ const calcBtn = document.getElementById('calc-btn');
 function refine(text) {
   let list = text
     .replace(/[\s]+/g,'') //delete whitespace
+    .replace(/[,]+$/,'') //delete trailing commas
     .split(/[,]+/) //convert comma delimited string into array (of strings)
     .map(Number) //convert all entries into numbers or NaN
     .sort((a,b) => a-b); //sort the list; NaN (if any) will appear at the end

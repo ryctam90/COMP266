@@ -21,7 +21,7 @@ body {
   font-family: Verdana, Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
 }
 
 header {min-height: 2.5rem;}
