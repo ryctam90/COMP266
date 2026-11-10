@@ -16,7 +16,3 @@
 }
 
 .card-description>h2 {margin-top: 0;}
-
-@media screen and (max-width: 700px) {
-  .card {min-width: 400px;}
-}

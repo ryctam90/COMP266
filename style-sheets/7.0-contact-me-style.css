@@ -15,11 +15,18 @@
   font-weight: 600;
 }
 
+.contact-me > input {
+  box-sizing: border-box;
+  width: 100%;
+}
+
 textarea {
   resize:vertical;
   min-height: 5rem;
   max-height: 30rem;
   overflow: auto;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 ul.user-type {margin:0;}
