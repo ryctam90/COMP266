@@ -27,51 +27,55 @@
 </nav>
 
 <header>
-  <img id="navbar-button" src="assets/menu-button.svg" aria-label="Open/Close Navigation Menu" height="40">
+  <button id="navbar-button" aria-controls="navbar" aria-expanded="false" aria-label="Menu">
+    <img id="navbar-button-image" src="assets/menu-button.svg" alt=""  height="40">
+  </button>
   <h1 id="banner-title">Useful Resources</h1>
 </header>
 
-<main id="content" class="content">
-  <p>
-    Here are some other websites that may help you out!
-  </p>
-    
-  <div class="card">
-    <div>
-      <a href="https://google.com" title="Google">
-        <img class="card-image" src="assets/Google Logo.webp" alt="Google logo" width="100" />
-      </a>
+<div class="scrolling-container">
+  <main id="content" class="content">
+    <p>
+      Here are some other websites that may help you out!
+    </p>
+      
+    <div class="card">
+      <div>
+        <a href="https://google.com" title="Google">
+          <img class="card-image" src="assets/Google Logo.webp" alt="Google logo" width="100" />
+        </a>
+      </div>
+      <div class="card-description">
+        <h2><a href="https://google.com" title="Google">Google</a></h2>
+        <p>A pretty neat website to search for stuff.</p>
+      </div>
     </div>
-    <div class="card-description">
-      <h2><a href="https://google.com" title="Google">Google</a></h2>
-      <p>A pretty neat website to search for stuff.</p>
+    <div class="card">
+      <div>
+        <a href="https://jensenmath.ca" title="Jensen Math">
+          <img class="card-image" src="assets/Jensen_Math_Logo.webp" alt="Jensen Math logo" width="100" />
+        </a>
+      </div>
+      <div class="card-description">
+        <h2><a href="https://jensenmath.ca" title="Jensen Math">Jensen Math</a></h2>
+        <p>Lots of good videos, worksheets, and lessons focusing on grades 9-12 math courses!</p>
+      </div>
     </div>
-  </div>
-  <div class="card">
-    <div>
-      <a href="https://jensenmath.ca" title="Jensen Math">
-        <img class="card-image" src="assets/Jensen_Math_Logo.webp" alt="Jensen Math logo" width="100" />
-      </a>
+    <div class="card">
+      <div class="card-image">
+        <a href="https://wikipedia.org" title="Wikipedia">
+          <img class="card-image" src="assets/Wiki Logo.webp" alt="Wikipedia logo" width="100" />
+        </a>
+      </div>
+      <div class="card-description">
+        <h2><a href="https://wikipedia.org" title="Wikipedia">Wikipedia</a></h2>
+        <p>Another cool website with lots of information.</p>
+      </div>
     </div>
-    <div class="card-description">
-      <h2><a href="https://jensenmath.ca" title="Jensen Math">Jensen Math</a></h2>
-      <p>Lots of good videos, worksheets, and lessons focusing on grades 9-12 math courses!</p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-image">
-      <a href="https://wikipedia.org" title="Wikipedia">
-        <img class="card-image" src="assets/Wiki Logo.webp" alt="Wikipedia logo" width="100" />
-      </a>
-    </div>
-    <div class="card-description">
-      <h2><a href="https://wikipedia.org" title="Wikipedia">Wikipedia</a></h2>
-      <p>Another cool website with lots of information.</p>
-    </div>
-  </div>
-</main>
+  </main>
 
-<footer>Ricci Tam. Last modified 2026-11-08.</footer>
+  <footer>Ricci Tam. Last modified 2026-11-08.</footer>
+</div>
 
 <script type="text/javascript" src="javascript/hamburger-menu.js"></script>
 

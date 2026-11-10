@@ -27,78 +27,82 @@
 </nav>
 
 <header>
-  <img id="navbar-button" src="assets/menu-button.svg" aria-label="Open/Close Navigation Menu" height="40">
+  <button id="navbar-button" aria-controls="navbar" aria-expanded="false" aria-label="Menu">
+    <img id="navbar-button-image" src="assets/menu-button.svg" alt=""  height="40">
+  </button>
   <h1 id="banner-title">Clock</h1>
 </header>
 
-<main id="content" class="content">
-  <div id="container-clock" class="container-time-tool" tabindex="0">
-    <div id="clock" class="time-tool js-element time-tool-display">
-      Clock
-    </div>
-  </div>
-
-  <div id="container-timer" class="container-time-tool is-hidden" tabindex="0">
-    <div id="timer" class="time-tool">
-      <div id="timer-display" class="time-tool-display">
-        <input id="timer-input" class="time-tool-display" placeholder="00:10:00" />
-      </div>
-      <div class="controls">
-          <button id="start-btn-timer" aria-label="Start">Start</button>
-          <button id="resume-btn-timer" class="is-hidden accentuate-bg" aria-label="Resume">Resume</button>
-          <button id="stop-btn-timer" class="is-hidden accentuate-bg" aria-label="Pause">Pause</button>
-          <button id="reset-btn-timer" aria-label="Reset">Reset</button>
-          <button id="mute-toggle" aria-label="Toggle mute">Mute</button>
-          <button id="fullscreen-toggle" aria-label="Toggle fullscreen">Fullscreen</button>
+<div class="scrolling-container">
+  <main id="content" class="content">
+    <div id="container-clock" class="container-time-tool" tabindex="0">
+      <div id="clock" class="time-tool js-element time-tool-display">
+        Clock
       </div>
     </div>
-  </div>
 
-  <div id="container-stopwatch" class="container-time-tool is-hidden" tabindex="0">
-    <div id="stopwatch" class="time-tool">
-      <div id="stopwatch-display" class="time-tool-display">
-        00:00:00.00
-      </div>
-      <div class="controls">
-        <button id="start-btn-stopwatch" aria-label="Start">Start</button>
-        <button id="resume-btn-stopwatch" class="is-hidden accentuate-bg" aria-label="Resume">Resume</button>
-        <button id="stop-btn-stopwatch" class="is-hidden accentuate-bg" aria-label="Stop">Stop</button>
-        <button id="reset-btn-stopwatch" aria-label="Reset">Reset</button>
+    <div id="container-timer" class="container-time-tool is-hidden" tabindex="0">
+      <div id="timer" class="time-tool">
+        <div id="timer-display" class="time-tool-display">
+          <input id="timer-input" class="time-tool-display" placeholder="00:10:00" />
+        </div>
+        <div class="controls">
+            <button id="start-btn-timer" aria-label="Start">Start</button>
+            <button id="resume-btn-timer" class="is-hidden accentuate-bg" aria-label="Resume">Resume</button>
+            <button id="stop-btn-timer" class="is-hidden accentuate-bg" aria-label="Pause">Pause</button>
+            <button id="reset-btn-timer" aria-label="Reset">Reset</button>
+            <button id="mute-toggle" aria-label="Toggle mute">Mute</button>
+            <button id="fullscreen-toggle" aria-label="Toggle fullscreen">Fullscreen</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="other-time-tools">
-    <button
-      class="nav-btn is-active-button"
-      data-link="container-clock"
-      data-title="Clock"
-      aria-label="Switch to Clock"
-    >
-      Clock
-    </button>
-    
-    <button
-      class="nav-btn"
-      data-link="container-timer"
-      data-title="Timer"
-      aria-label="Switch to Timer"
-    >
-      Timer
-    </button>
-    
-    <button
-      class="nav-btn"
-      data-link="container-stopwatch"
-      data-title="Stopwatch"
-      aria-label="Switch to Stopwatch"
-    >
-      Stopwatch
-    </button>
-  </div>
-</main>
+    <div id="container-stopwatch" class="container-time-tool is-hidden" tabindex="0">
+      <div id="stopwatch" class="time-tool">
+        <div id="stopwatch-display" class="time-tool-display">
+          00:00:00.00
+        </div>
+        <div class="controls">
+          <button id="start-btn-stopwatch" aria-label="Start">Start</button>
+          <button id="resume-btn-stopwatch" class="is-hidden accentuate-bg" aria-label="Resume">Resume</button>
+          <button id="stop-btn-stopwatch" class="is-hidden accentuate-bg" aria-label="Stop">Stop</button>
+          <button id="reset-btn-stopwatch" aria-label="Reset">Reset</button>
+        </div>
+      </div>
+    </div>
 
-<footer>Ricci Tam. Last modified 2026-11-08.</footer>
+    <div class="other-time-tools">
+      <button
+        class="nav-btn is-active-button"
+        data-link="container-clock"
+        data-title="Clock"
+        aria-label="Switch to Clock"
+      >
+        Clock
+      </button>
+      
+      <button
+        class="nav-btn"
+        data-link="container-timer"
+        data-title="Timer"
+        aria-label="Switch to Timer"
+      >
+        Timer
+      </button>
+      
+      <button
+        class="nav-btn"
+        data-link="container-stopwatch"
+        data-title="Stopwatch"
+        aria-label="Switch to Stopwatch"
+      >
+        Stopwatch
+      </button>
+    </div>
+  </main>
+
+  <footer>Ricci Tam. Last modified 2026-11-08.</footer>
+</div>
 
 <audio id="chime" src="assets/chime.mp3"></audio>
 <!-- Audio sampled from: -->

@@ -27,35 +27,39 @@
 </nav>
 
 <header>
-  <img id="navbar-button" src="assets/menu-button.svg" aria-label="Open/Close Navigation Menu" height="40">
+  <button id="navbar-button" aria-controls="navbar" aria-expanded="false" aria-label="Menu">
+    <img id="navbar-button-image" src="assets/menu-button.svg" alt=""  height="40">
+  </button>
   <h1 id="banner-title">Printable Cartesian Planes</h1>
 </header>
 
-<main id="content" class="content">
-  <div class="container-printable-cartesian-plane">
-    <div class="settings-menus">
-      <div id="grid-settings" class="js-element">
-        <h2>Grid Settings</h2>
-        This is where the grid settings would go.
+<div class="scrolling-container">
+  <main id="content" class="content">
+    <div class="container-printable-cartesian-plane">
+      <div class="settings-menus">
+        <div id="grid-settings" class="js-element">
+          <h2>Grid Settings</h2>
+          This is where the grid settings would go.
+        </div>
+        <div id="page-settings" class="js-element">
+          <h2>Page Settings</h2>
+          This is where the page settings would go.
+        </div>
       </div>
-      <div id="page-settings" class="js-element">
-        <h2>Page Settings</h2>
-        This is where the page settings would go.
+      <div class="preview">
+        <div class="preview-window js-element">
+          This is where the preview would go.
+        </div>
+        <div class="btn-cluster">
+          <button class="download" aria-label="Download">Download</button>
+          <button class="print" aria-label="Print">Print</button>
+        </div>
       </div>
     </div>
-    <div class="preview">
-      <div class="preview-window js-element">
-        This is where the preview would go.
-      </div>
-      <div class="btn-cluster">
-        <button class="download" aria-label="Download">Download</button>
-        <button class="print" aria-label="Print">Print</button>
-      </div>
-    </div>
-  </div>
-</main >
+  </main >
 
-<footer>Ricci Tam. Last modified 2026-11-08.</footer>
+  <footer>Ricci Tam. Last modified 2026-11-08.</footer>
+</div>
 
 <script type="text/javascript" src="javascript/hamburger-menu.js"></script>
 

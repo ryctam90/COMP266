@@ -27,45 +27,49 @@
 </nav> 
 
 <header>
-  <img id="navbar-button" src="assets/menu-button.svg" aria-label="Open/Close Navigation Menu" height="40">
+  <button id="navbar-button" aria-controls="navbar" aria-expanded="false" aria-label="Menu">
+    <img id="navbar-button-image" src="assets/menu-button.svg" alt=""  height="40">
+  </button>
   <h1 id="banner-title">Contact Me</h1>
 </header>
 
-<main id="content" class="content">
-  <p>
-    If you have any questions or feedback, I'd love to hear from you! Complete the form below and I will get back to you.
-  </p>
-  <form class="contact-me" action="mailto:riccit@gmail.com" method="post" enctype="text/plain">
-    <label for="name">Name:</label>
-    <input id="name" type="text" name="name"/>
-    <label for="user-email">Email:</label>
-    <input  id="user-email" type="email" name="user-email"/>
-    <label for="message">Message:</label>
-    <textarea id="message" name="message"></textarea>
-    <label>Which best describes you?</label>
-    <ul class="user-type">
-      <li>
-        <input id="user-student" type="radio" name="user-type" value="Student" />
-        <label for="user-student">Student</label>
-      </li>
-      <li>
-        <input id="user-parent" type="radio" name="user-type" value="Parent" />
-        <label for="user-parent">Parent</label>
-      </li>
-      <li>
-        <input id="user-teacher" type="radio" name="user-type" value="Teacher" />
-        <label for="user-teacher">Teacher</label>
-      </li>
-      <li>
-        <input id="user-other" type="radio" name="user-type" value="Other" />
-        <label for="user-other">Other</label>
-      </li>
-    </ul>
-    <div><button type="submit">Submit</button></div>
-  </form>
-</main>
+<div class="scrolling-container">
+  <main id="content" class="content">
+    <p>
+      If you have any questions or feedback, I'd love to hear from you! Complete the form below and I will get back to you.
+    </p>
+    <form class="contact-me" action="mailto:riccit@gmail.com" method="post" enctype="text/plain">
+      <label for="name">Name:</label>
+      <input id="name" type="text" name="name"/>
+      <label for="user-email">Email:</label>
+      <input  id="user-email" type="email" name="user-email"/>
+      <label for="message">Message:</label>
+      <textarea id="message" name="message"></textarea>
+      <label>Which best describes you?</label>
+      <ul class="user-type">
+        <li>
+          <input id="user-student" type="radio" name="user-type" value="Student" />
+          <label for="user-student">Student</label>
+        </li>
+        <li>
+          <input id="user-parent" type="radio" name="user-type" value="Parent" />
+          <label for="user-parent">Parent</label>
+        </li>
+        <li>
+          <input id="user-teacher" type="radio" name="user-type" value="Teacher" />
+          <label for="user-teacher">Teacher</label>
+        </li>
+        <li>
+          <input id="user-other" type="radio" name="user-type" value="Other" />
+          <label for="user-other">Other</label>
+        </li>
+      </ul>
+      <div><button type="submit">Submit</button></div>
+    </form>
+  </main>
 
-<footer>Ricci Tam. Last modified 2026-11-08.</footer>
+  <footer>Ricci Tam. Last modified 2026-11-08.</footer>
+</div>
 
 <script type="text/javascript" src="javascript/hamburger-menu.js"></script>
 
