@@ -44,7 +44,7 @@
     <div id="container-timer" class="container-time-tool is-hidden" tabindex="0">
       <div id="timer" class="time-tool">
         <div id="timer-display" class="time-tool-display">
-          <input id="timer-input" class="time-tool-display" placeholder="00:10:00" />
+          <input id="timer-input" class="time-tool-display" aria-live="off" aria-label="Remaining time" placeholder="00:10:00" />
         </div>
         <div class="controls">
             <button id="start-btn-timer" aria-label="Start">Start</button>
@@ -59,7 +59,7 @@
 
     <div id="container-stopwatch" class="container-time-tool is-hidden" tabindex="0">
       <div id="stopwatch" class="time-tool">
-        <div id="stopwatch-display" class="time-tool-display">
+        <div id="stopwatch-display" class="time-tool-display" aria-live="off" aria-label="Elapsed time">
           00:00:00.00
         </div>
         <div class="controls">
