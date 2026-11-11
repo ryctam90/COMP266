@@ -1,11 +1,11 @@
 const display = document.getElementById('one-var-stat-summary');
 const calcBtn = document.getElementById('calc-btn');
 
-//converts text:string to sorted list of numbers
+//converts text:string to sorted list of numbers.
 function refine(text) {
   let list = text
     .replace(/[\s]+/g,'') //delete whitespace
-    .replace(/[,]+$/,'') //delete trailing commas
+    .replace(/[,]+$/,'') //delete trailing commas; necessary, otherwise an unwanted 0 will be added.
     .split(/[,]+/) //convert comma delimited string into array (of strings)
     .map(Number) //convert all entries into numbers or NaN
     .sort((a,b) => a-b); //sort the list; NaN (if any) will appear at the end
