@@ -146,8 +146,12 @@ timerMuteBtn.addEventListener('click', () => {
 
 //toggles fullscreen of the timer
 //webkit prefix is needed to work on older versions of Safari
+//iPhone can't fullscreen non-video elements, so a message is presented if fullscreen is not available
 timerFullscreenBtn.addEventListener('click', () => {
-  if (document.fullscreenElement || document.webkitFullscreenElement) {
+  if (!(document.fullscreenEnabled || document.webkitFullscreenEnabled)) {
+    alert('Fullscreen is unavailable on this device/browser.');
+  }
+  else if (document.fullscreenElement || document.webkitFullscreenElement) {
     if (document.exitFullscreen) {document.exitFullscreen();}
     else if (document.webkitExitFullscreen) {document.webkitExitFullscreen();}
   }

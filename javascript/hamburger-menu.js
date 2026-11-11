@@ -5,7 +5,8 @@ const overlay = document.getElementById('overlay');
 const content = document.getElementById('content');
 
 
-//toggleMenu toggles between a closed and open navbar with dark grey overlay. While open, main content of the webpage gets disabled.
+//toggleMenu toggles between a closed and open navbar with dark grey overlay.
+//While open, main content of the webpage gets disabled and aria-expanded turns true for screen readers.
 function toggleMenu() {
   navbar.classList.toggle('collapsed');
   overlay.classList.toggle('collapsed');
