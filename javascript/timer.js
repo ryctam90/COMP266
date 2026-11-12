@@ -19,7 +19,7 @@ const chime = document.getElementById('chime');
 const timerMuteBtn = document.getElementById('mute-toggle');
 const timerFullscreenBtn = document.getElementById('fullscreen-toggle');
 
-//ensures input is appears from right to left when inputted.
+//ensures input appears from right to left when inputted.
 timerInput.addEventListener('input', () => {
   const userInput = timerInput.value
     .replace(/\D/g,'') //take out all non-digits
