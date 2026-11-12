@@ -3,7 +3,7 @@ const calcBtn = document.getElementById('calc-btn');
 
 //converts text:string to sorted list of numbers.
 function refine(text) {
-  let list = text
+  const list = text
     .replace(/[\s]+/g,'') //delete whitespace
     .replace(/[,]+$/,'') //delete trailing commas; necessary, otherwise an unwanted 0 will be added.
     .split(/[,]+/) //convert comma delimited string into array (of strings)
@@ -43,12 +43,12 @@ function getModes(list) {
   //finds the max frequency (value) and filters all the keys with that value
   const maxFreq = Math.max(...Object.values(freqList));
   const modes = Object.keys(freqList)
-    .filter((datum) => freqList[datum] === maxFreq)
+    .filter((datum) => freqList[datum] === maxFreq);
   
   //includes a message if there is more than one mode AND that there are a lot of modes
   //(more than 10% of the data points hit the modal frequency)
   if (modes.length === 1) {return modes}
-  else if (modes.length >= 0.1*Object.keys(freqList).length) {
+  else if (modes.length > 0.1*Object.keys(freqList).length) {
     return 'Warning: Over 10% of the distinct data values appears with the modal frequency <br />'+modes;
   }
   else {
@@ -56,54 +56,38 @@ function getModes(list) {
   }
 };
 
-//finds the median and upper/lower quartiles of a sorted list based on the number of elements mod 4
-function getQuartiles(list) {
-  const n = list.length;
-  if (n % 4 === 0) {
-    return [
-      (list[n/4]+list[n/4-1])/2,
-      (list[n/2]+list[n/2-1])/2,
-      (list[n*3/4]+list[n*3/4-1])/2
-    ];
-  }
-  else if (n % 4 === 1) {
-    return [
-      (list[Math.floor(n/4)]+list[Math.floor(n/4)-1])/2,
-      list[Math.floor(n/2)],
-      (list[Math.floor(n*3/4)]+list[Math.ceil(n*3/4)])/2
-    ];
-  }
-  else if (n % 4 === 2) {
-    return [
-      list[Math.floor(n/4)],
-      (list[n/2]+list[n/2-1])/2,
-      list[Math.floor(n*3/4)]
-    ];
-  }
-  else {
-    return [
-      list[Math.floor(n/4)],
-      list[Math.floor(n/2)],
-      list[Math.floor(n*3/4)]
-    ];
-  };
-};
+//takes a sorted list and returns the median.
+//the "m=n-1 with floor/ceil" trick bypasses the two (n % 2) cases and merges them into one, with the trade-off that
+//this might be a bit less intuitive than "if (n%2 === 0) {...}; else {...};".
+function getMedian(sorted) {
+  const m = sorted.length-1;
+  return (sorted[Math.floor(m/2)]+sorted[Math.ceil(m/2)])/2;
+}
+
+//takes a sorted list and returns a list of three elements: lower quartile, median, and upper quartile.
+function getQuartiles(sorted) {
+  const n = sorted.length;
+  const lowerHalf = sorted.slice(0,Math.floor(n/2));
+  const upperHalf = sorted.slice(Math.ceil(n/2));
+  return [getMedian(lowerHalf), getMedian(sorted), getMedian(upperHalf)];
+}
 
 //when the 'Calculate' button is clicked: assigns the values of the statistics to the innerHtml of the corresponding elements
 calcBtn.addEventListener('click', () => {
   const dataRaw = document.getElementById('data-input-box');
   const dataRefined = refine(dataRaw.value);
+  const n = dataRefined.length;
   const stats = {}; //creates an object with key-value pairs
-  stats.setSize = dataRefined.length;
+  stats.setSize = n;
   stats.min = dataRefined[0];
   stats.max = dataRefined.at(-1);
   stats.range = stats.max - stats.min;
   [stats.q1, stats.median, stats.q3] = getQuartiles(dataRefined);
   stats.iqr = stats.q3 - stats.q1;
-  stats.mean = dataRefined.reduce((a,b) => a+b, 0) / stats.setSize;
-  stats.popVar = dataRefined.reduce((a,b) => a+(b-stats.mean)**2, 0) / stats.setSize
+  stats.mean = dataRefined.reduce((a,b) => a+b, 0) / n;
+  stats.popVar = dataRefined.reduce((a,b) => a+(b-stats.mean)**2, 0) / n;
   stats.popStdDev = Math.sqrt(stats.popVar);
-  stats.sampleVar = dataRefined.reduce((a,b) => a+(b-stats.mean)**2, 0) / (stats.setSize - 1)
+  stats.sampleVar = dataRefined.reduce((a,b) => a+(b-stats.mean)**2, 0) / (n-1);
   stats.sampleStdDev = Math.sqrt(stats.sampleVar);
   stats.mode = getModes(dataRefined);
 
@@ -118,3 +102,39 @@ calcBtn.addEventListener('click', () => {
   });
   dataRaw.focus() //refocus back to the user input box in case editing is needed
 });
+
+//The following was my original plan for getQuartiles. However, I decided to opt for a more compact version instead of listing all cases mod 4.
+//I think the new code looks cleaner and less clunky.
+//
+//finds the median and upper/lower quartiles of a sorted list based on the number of elements mod 4
+// function getQuartiles(list) {
+//   const n = list.length;
+//   if (n % 4 === 0) {
+//     return [
+//       (list[n/4]+list[n/4-1])/2,
+//       (list[n/2]+list[n/2-1])/2,
+//       (list[n*3/4]+list[n*3/4-1])/2
+//     ];
+//   }
+//   else if (n % 4 === 1) {
+//     return [
+//       (list[Math.floor(n/4)]+list[Math.floor(n/4)-1])/2,
+//       list[Math.floor(n/2)],
+//       (list[Math.floor(n*3/4)]+list[Math.ceil(n*3/4)])/2
+//     ];
+//   }
+//   else if (n % 4 === 2) {
+//     return [
+//       list[Math.floor(n/4)],
+//       (list[n/2]+list[n/2-1])/2,
+//       list[Math.floor(n*3/4)]
+//     ];
+//   }
+//   else {
+//     return [
+//       list[Math.floor(n/4)],
+//       list[Math.floor(n/2)],
+//       list[Math.floor(n*3/4)]
+//     ];
+//   };
+// };

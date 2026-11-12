@@ -40,10 +40,10 @@ function updateStopwatchDisplay() {
   centiseconds++;
   
   //padStart ensures single digits are preceded by a leading 0
-  let h = String(Math.floor(centiseconds/100/60/60)).padStart(2,'0');
-  let m = String(Math.floor(centiseconds/100/60) % 60).padStart(2,'0');
-  let s = String(Math.floor(centiseconds/100) % 60).padStart(2,'0');
-  let cs = String(centiseconds % 100).padStart(2,'0');
+  const h = String(Math.floor(centiseconds/100/60/60)).padStart(2,'0');
+  const m = String(Math.floor(centiseconds/100/60) % 60).padStart(2,'0');
+  const s = String(Math.floor(centiseconds/100) % 60).padStart(2,'0');
+  const cs = String(centiseconds % 100).padStart(2,'0');
 
   stopwatchDisplay.textContent = `${h}:${m}:${s}.${cs}`;
 }

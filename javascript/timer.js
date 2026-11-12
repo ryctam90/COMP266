@@ -37,9 +37,9 @@ function hmsToSeconds(textHMS) {
 
 //takes the number of seconds and turns it into text in the form of hh:mm:ss
 function secondsToHMS(numSeconds) {
-  let h = String(Math.floor(numSeconds/60/60)).padStart(2,'0');
-  let m = String(Math.floor(numSeconds/60) % 60).padStart(2,'0');
-  let s = String(Math.floor(numSeconds) % 60).padStart(2,'0');
+  const h = String(Math.floor(numSeconds/60/60)).padStart(2,'0');
+  const m = String(Math.floor(numSeconds/60) % 60).padStart(2,'0');
+  const s = String(Math.floor(numSeconds) % 60).padStart(2,'0');
   return `${h}:${m}:${s}`;
 }
 
@@ -117,7 +117,6 @@ function resetTimer () {
   timerInput.classList.remove('accentuate-text');
   timerInput.readOnly = false; //enables the user to change timer input
 }
-
 
 //triggers for various buttons
 timerStartBtn.addEventListener('click', runTimer);
