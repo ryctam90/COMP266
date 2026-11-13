@@ -76,7 +76,7 @@ button, input, select, textarea {
 li {list-style-type: none;}
 
 /* Style for pill-shaped button adapted from https://www.w3schools.com/css/css3_buttons.asp */
-button:not(#navbar-button) {
+button {
   background: var(--main-colour);
   color: var(--white-colour);
   border: none;
